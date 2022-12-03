@@ -175,13 +175,6 @@ update_status ModuleEditor::Update()
 		ImGui::SameLine();
 		ImGui::InputText("Name", gameobName, 256);
 
-
-		ms_log = new float[60];
-		fps_log = new float[60];
-		stable_fps_log = new float[60];
-		last_ms_log = SDL_GetTicks();
-		fps_offset = 0;
-		stable_offset = 0;
 		
 
 		if (ImGui::BeginChild("Transform")) {
@@ -199,12 +192,12 @@ update_status ModuleEditor::Update()
 			ImGui::EndChild;
 		}
 
-		ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
-		ImGui::ColorEdit3("clear color", (float*)&clear_color);
-		if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
-			counter++;
-		ImGui::SameLine();
-		ImGui::Text("counter = %d", counter);
+		//ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
+		//ImGui::ColorEdit3("clear color", (float*)&clear_color);
+		//if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
+		//	counter++;
+		//ImGui::SameLine();
+		//ImGui::Text("counter = %d", counter);
 
 
 
