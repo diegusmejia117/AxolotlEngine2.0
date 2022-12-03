@@ -14,7 +14,7 @@ Mesh::~Mesh()
 {
 }
 
-Mesh* Mesh::LoadMesh(const aiMesh* i_mesh)
+Mesh* Mesh::Load(const aiMesh* i_mesh)
 {
 	Mesh* mesh = new Mesh();
 	mesh->m_materialIndex = i_mesh->mMaterialIndex;

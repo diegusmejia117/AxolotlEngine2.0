@@ -2,6 +2,8 @@
 #include "ModuleWindow.h"
 #include "Application.h"
 #include "ModuleRender.h"
+#include "Mesh.h"
+#include "Model.h"
 
 
 #include "imgui_impl_opengl3.h"
@@ -49,7 +51,26 @@ bool ModuleEditor::Init()
 		io.ConfigDockingTransparentPayload = true;
 	}
 
-	fpsHist = std::vector<float>(fpsCaptures);
+	fpsHistoric = std::vector<float>(fpsCaptures);
+
+	//SDL HARDWARE ACCESS
+
+	m_sdlVersion = std::to_string(SDL_MAJOR_VERSION) + "." + std::to_string(SDL_MINOR_VERSION) + "." + std::to_string(SDL_PATCHLEVEL);
+
+	int cacheSizeInB = SDL_GetCPUCacheLineSize();
+	int cacheSizeInKB = std::ceil(cacheSizeInB / 1000.f);
+	int cacheSizeInKb = cacheSizeInKB * 8;
+	m_cpusAndCache = std::to_string(SDL_GetCPUCount()) + " (Cache: " + std::to_string(cacheSizeInKb) + "kb)";
+
+	int ramInMB = SDL_GetSystemRAM();
+	float ramInGB = ramInMB / 1000.f;
+	float ramInGb = ramInGB * 8.f;
+
+	int ramInGbOneDecimalAux = std::ceil(ramInGb * 10.f);
+	std::string ramInGbOneDecimal = std::to_string(ramInGbOneDecimalAux);
+
+	ramInGbOneDecimal.insert(ramInGbOneDecimal.length() - 1, ".");
+	m_ram = ramInGbOneDecimal + "Gb";
 
 
 	return true;
@@ -63,6 +84,13 @@ bool ModuleEditor::Start()
 	ImGui::PushStyleColor(ImGuiCol_FrameBg, ImVec4(1.0f, 1.0f, 1.0f, 0.10f));
 	ImGui::PushStyleColor(ImGuiCol_PlotHistogram, (ImVec4)ImColor(0.54f, 0.43f, 0.12f, 0.97f));
 
+	//GPU STARTUP INFO
+	char glVendor[128];
+	sprintf(glVendor, "%s", glGetString(GL_VENDOR));
+	m_gpuVendor = _strdup(glVendor);
+	char glRenderer[128];
+	sprintf(glRenderer, "%s", glGetString(GL_RENDERER));
+	m_gpuBrand = _strdup(glRenderer);
 
 	return true;
 }
@@ -140,11 +168,13 @@ update_status ModuleEditor::Update()
 
 	if (ImGui::Begin(gameobName)) {
 
-
+		
+	
 
 		ImGui::Checkbox("Enabled", &show_another_window);
 		ImGui::SameLine();
 		ImGui::InputText("Name", gameobName, 256);
+
 
 		ms_log = new float[60];
 		fps_log = new float[60];
@@ -152,19 +182,6 @@ update_status ModuleEditor::Update()
 		last_ms_log = SDL_GetTicks();
 		fps_offset = 0;
 		stable_offset = 0;
-
-		//ms_log[fps_offset] = frame_timer.Read();
-		/*if (ms_log[fps_offset] == 0) ms_log[fps_offset] = 1;
-		fps_log[fps_offset] = 1000 / ms_log[fps_offset];*/
-		//frame_timer.Start();
-
-		/*if(stable_timer.Read() >= 500.0f)
-		{
-	
-		stable_offset++;
-		if (stable_offset > 59) stable_offset = 0;
-		stable_fps_log[stable_offset] = 2.0f * stable_frame_counter;
-		}*/
 		
 
 		if (ImGui::BeginChild("Transform")) {
@@ -176,14 +193,7 @@ update_status ModuleEditor::Update()
 			//ImGui::InputFloat("X",0.0f*, 0.0f*);
 			ImGui::Text("Rotation");
 			ImGui::Text("Scale");
-			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-
-			/*char title[50];
-			sprintf_s(title, 50, "Framerate(Current) %.1f", fps_log[fps_offset]);
-			ImGui::PlotHistogram("currentFrames", &fps_log[0], 60, fps_offset, title, 0.0f, 120.0f, ImVec2(310, 100));
-
-			sprintf_s(title, 50, "Framerate(Current) %.1f", ms_log[fps_offset]);
-			ImGui::PlotHistogram("currentFrames", &ms_log[0], 60, fps_offset, title, 0.0f, 120.0f, ImVec2(310, 100));*/
+			
 
 			
 			ImGui::EndChild;
@@ -196,28 +206,63 @@ update_status ModuleEditor::Update()
 		ImGui::SameLine();
 		ImGui::Text("counter = %d", counter);
 
+
+
+		if (ImGui::BeginChild("Model Data")) {
+
+			ImGui::Text("VertexNum:");
+			
+			//ImGui::Text(m_numVertices);
+
+			ImGui::Separator();
+			ImGui::EndChild;
+		}
+
+
+		if (ImGui::BeginChild("HARDWARE INFO")) {
+
+
+			ImGui::Text(("CPU: " + m_cpusAndCache).c_str());
+			ImGui::Text(("System RAM: " + m_ram).c_str());
+
+			
+
+			ImGui::Text(("GPU: " + m_gpuVendor).c_str());
+			ImGui::Text(("Brand: " + m_gpuBrand).c_str());
+
+			ImGui::Separator();
+
+			ImGui::Text(("SDL Version: " + m_sdlVersion).c_str());
+
+
+			ImGui::EndChild;
+		}
+
 		ImGui::EndMenu();
+
+		
 	}
 
 	if (ImGui::Begin("FPS")) {
+		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 		float maxFPS = App->GetFPS();
 		ImGui::SliderFloat("Max FPS", &maxFPS, 0.f, 120.f, "%.1f", ImGuiSliderFlags_AlwaysClamp);
 		App->SetFPS(maxFPS);
 
 		int deltaTime = App->GetDeltaTime();
-		fpsHist[currentIndex] = 1000.f / deltaTime;
+		fpsHistoric[currentIndex] = 1000.f / deltaTime;
 
 		char title[50];
-		sprintf_s(title, 50, "Framerate %.1f", fpsHist[currentIndex]);
-		ImGui::PlotHistogram("##framerate", &fpsHist[0], fpsCaptures, 0, title, 0.0f, 120.f, ImVec2(310, 100));
+		sprintf_s(title, 50, "Framerate %.1f", fpsHistoric[currentIndex]);
+		ImGui::PlotHistogram("##framerate", &fpsHistoric[0], fpsCaptures, 0, title, 0.0f, 120.f, ImVec2(310, 100));
 
 		if (currentIndex < fpsCaptures - 1) {
 			++currentIndex;
 		}
 		else {
 
-			fpsHist.erase(fpsHist.begin());
-			fpsHist.push_back(0);
+			fpsHistoric.erase(fpsHistoric.begin());
+			fpsHistoric.push_back(0);
 		}
 	}
 	

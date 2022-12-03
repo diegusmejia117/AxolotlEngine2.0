@@ -1,6 +1,7 @@
 #pragma once
 #include "Module.h"
 #include "Globals.h"
+#include "Model.h"
 #include <vector>
 #include <string>
 
@@ -24,9 +25,16 @@ private:
 
 	int fpsCaptures = 120;
 	int currentIndex = 0;
-	std::vector<float> fpsHist;
-	//std::string name;
+	std::vector<float> fpsHistoric;
+	const Model* m_model = nullptr;
 
-
-
+	std::string m_sdlVersion;
+	std::string m_cpusAndCache;
+	std::string m_ram;
+	std::string m_gpuVendor;
+	std::string m_gpuBrand;
 };
+	
+
+
+

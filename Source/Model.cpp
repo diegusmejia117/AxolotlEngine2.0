@@ -9,7 +9,7 @@
 #include "cimport.h"
 #include "postprocess.h"
 
-const std::string Model::s_modelFolderPath = "models/";
+
 
 Model::Model()
 {
@@ -23,7 +23,7 @@ Model* Model::LoadFromFile(std::string i_fileName)
 {
 	Model* model = new Model();
 
-	//std::string filePath = s_modelFolderPath + i_fileName;
+	
 	const aiScene* scene = aiImportFile(i_fileName.c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
 
 	if (scene)
@@ -66,7 +66,7 @@ void Model::LoadMaterials(const aiScene* i_scene)
 void Model::LoadMeshes(aiMesh** i_meshes, int i_numMeshes)
 {
 	for (int i = 0; i < i_numMeshes; ++i) {
-		Mesh* mesh = Mesh::LoadMesh(i_meshes[i]);
+		Mesh* mesh = Mesh::Load(i_meshes[i]);
 		m_meshes.push_back(mesh);
 	}
 }
