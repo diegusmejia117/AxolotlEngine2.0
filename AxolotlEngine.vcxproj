@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{e0649071-91d0-40f2-b2fa-ecee48514179}</ProjectGuid>
+    <RootNamespace>AxolotlEngine</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS;</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)External\assimp\;$(SolutionDir)External\assimp\assimp;$(SolutionDir)External\DirectXTex;$(SolutionDir)External\MathGeoLib;$(SolutionDir)External\ImGui\Include\GlueCode;$(SolutionDir)External\ImGui\Include\MainSource;$(SolutionDir)External\glew-2.1.0\include;$(SolutionDir)External\SDL\include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)External\glew-2.1.0\lib\Release\x64;$(SolutionDir)External\DirectXTex\DirectXTex\Bin\Desktop_2019_Win10\x64\Release;$(SolutionDir)External\DirectXTex\DirectXTex\Bin\Desktop_2019_Win10\x64\Debug;$(SolutionDir)External\assimp\lib;$(SolutionDir)External\SDL\lib\x64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>assimp-vc142-mt.lib;DirectXTex.lib;glew32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS;</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)External\assimp\;$(SolutionDir)External\assimp\assimp;$(SolutionDir)External\DirectXTex;$(SolutionDir)External\MathGeoLib;$(SolutionDir)External\ImGui\Include\GlueCode;$(SolutionDir)External\ImGui\Include\MainSource;$(SolutionDir)External\glew-2.1.0\include;$(SolutionDir)External\SDL\include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)External\glew-2.1.0\lib\Release\x64;$(SolutionDir)External\DirectXTex\DirectXTex\Bin\Desktop_2019_Win10\x64\Release;$(SolutionDir)External\DirectXTex\DirectXTex\Bin\Desktop_2019_Win10\x64\Debug;$(SolutionDir)External\assimp\lib;$(SolutionDir)External\SDL\lib\x64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>assimp-vc142-mt.lib;DirectXTex.lib;glew32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Application.cpp" />
+    <ClCompile Include="External\ImGui\Include\GlueCode\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="External\ImGui\Include\GlueCode\imgui_impl_sdl.cpp" />
+    <ClCompile Include="External\ImGui\Include\MainSource\imgui.cpp" />
+    <ClCompile Include="External\ImGui\Include\MainSource\imgui_demo.cpp" />
+    <ClCompile Include="External\ImGui\Include\MainSource\imgui_draw.cpp" />
+    <ClCompile Include="External\ImGui\Include\MainSource\imgui_tables.cpp" />
+    <ClCompile Include="External\ImGui\Include\MainSource\imgui_widgets.cpp" />
+    <ClCompile Include="External\MathGeoLib\Algorithm\GJK.cpp" />
+    <ClCompile Include="External\MathGeoLib\Algorithm\GJK2D.cpp" />
+    <ClCompile Include="External\MathGeoLib\Algorithm\Random\LCG.cpp" />
+    <ClCompile Include="External\MathGeoLib\Algorithm\SAT.cpp" />
+    <ClCompile Include="External\MathGeoLib\Geometry\AABB.cpp" />
+    <ClCompile Include="External\MathGeoLib\Geometry\Capsule.cpp" />
+    <ClCompile Include="External\MathGeoLib\Geometry\Circle.cpp" />
+    <ClCompile Include="External\MathGeoLib\Geometry\Circle2D.cpp" />
+    <ClCompile Include="External\MathGeoLib\Geometry\Frustum.cpp" />
+    <ClCompile Include="External\MathGeoLib\Geometry\Line.cpp" />
+    <ClCompile Include="External\MathGeoLib\Geometry\LineSegment.cpp" />
+    <ClCompile Include="External\MathGeoLib\Geometry\LineSegment2D.cpp" />
+    <ClCompile Include="External\MathGeoLib\Geometry\OBB.cpp" />
+    <ClCompile Include="External\MathGeoLib\Geometry\PBVolume.cpp" />
+    <ClCompile Include="External\MathGeoLib\Geometry\Plane.cpp" />
+    <ClCompile Include="External\MathGeoLib\Geometry\Polygon.cpp" />
+    <ClCompile Include="External\MathGeoLib\Geometry\Polyhedron.cpp" />
+    <ClCompile Include="External\MathGeoLib\Geometry\Ray.cpp" />
+    <ClCompile Include="External\MathGeoLib\Geometry\Sphere.cpp" />
+    <ClCompile Include="External\MathGeoLib\Geometry\Triangle.cpp" />
+    <ClCompile Include="External\MathGeoLib\Geometry\Triangle2D.cpp" />
+    <ClCompile Include="External\MathGeoLib\Geometry\TriangleMesh.cpp" />
+    <ClCompile Include="External\MathGeoLib\Math\BitOps.cpp" />
+    <ClCompile Include="External\MathGeoLib\Math\Callstack.cpp" />
+    <ClCompile Include="External\MathGeoLib\Math\float2.cpp" />
+    <ClCompile Include="External\MathGeoLib\Math\float3.cpp" />
+    <ClCompile Include="External\MathGeoLib\Math\float3x3.cpp" />
+    <ClCompile Include="External\MathGeoLib\Math\float3x4.cpp" />
+    <ClCompile Include="External\MathGeoLib\Math\float4.cpp" />
+    <ClCompile Include="External\MathGeoLib\Math\float4d.cpp" />
+    <ClCompile Include="External\MathGeoLib\Math\float4x4.cpp" />
+    <ClCompile Include="External\MathGeoLib\Math\grisu3.c" />
+    <ClCompile Include="External\MathGeoLib\Math\grisu3_cpp.cpp" />
+    <ClCompile Include="External\MathGeoLib\Math\MathFunc.cpp" />
+    <ClCompile Include="External\MathGeoLib\Math\MathLog.cpp" />
+    <ClCompile Include="External\MathGeoLib\Math\MathOps.cpp" />
+    <ClCompile Include="External\MathGeoLib\Math\MiniFloat.cpp" />
+    <ClCompile Include="External\MathGeoLib\Math\Polynomial.cpp" />
+    <ClCompile Include="External\MathGeoLib\Math\Quat.cpp" />
+    <ClCompile Include="External\MathGeoLib\Math\SSEMath.cpp" />
+    <ClCompile Include="External\MathGeoLib\Math\TransformOps.cpp" />
+    <ClCompile Include="External\MathGeoLib\Time\Clock.cpp" />
+    <ClCompile Include="Source\log.cpp" />
+    <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="Source\Mesh.cpp" />
+    <ClCompile Include="Source\Model.cpp" />
+    <ClCompile Include="Source\ModuleCamera.cpp" />
+    <ClCompile Include="Source\ModuleDebugDraw.cpp" />
+    <ClCompile Include="Source\ModuleEditor.cpp" />
+    <ClCompile Include="Source\ModuleEngine.cpp" />
+    <ClCompile Include="Source\ModuleInput.cpp" />
+    <ClCompile Include="Source\ModuleProgram.cpp" />
+    <ClCompile Include="Source\ModuleRender.cpp" />
+    <ClCompile Include="Source\ModuleRenderExercise.cpp" />
+    <ClCompile Include="Source\ModuleTexture.cpp" />
+    <ClCompile Include="Source\ModuleWindow.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Application.h" />
+    <ClInclude Include="Source\debugdraw.h" />
+    <ClInclude Include="Source\debug_draw.hpp" />
+    <ClInclude Include="Source\Dummy.h" />
+    <ClInclude Include="External\ImGui\Include\GlueCode\imgui_impl_opengl3.h" />
+    <ClInclude Include="External\ImGui\Include\GlueCode\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="External\ImGui\Include\GlueCode\imgui_impl_sdl.h" />
+    <ClInclude Include="External\ImGui\Include\MainSource\imconfig.h" />
+    <ClInclude Include="External\ImGui\Include\MainSource\imgui.h" />
+    <ClInclude Include="External\ImGui\Include\MainSource\imgui_internal.h" />
+    <ClInclude Include="External\ImGui\Include\MainSource\imstb_rectpack.h" />
+    <ClInclude Include="External\ImGui\Include\MainSource\imstb_textedit.h" />
+    <ClInclude Include="External\ImGui\Include\MainSource\imstb_truetype.h" />
+    <ClInclude Include="External\MathGeoLib\Algorithm\GJK.h" />
+    <ClInclude Include="External\MathGeoLib\Algorithm\GJK2D.h" />
+    <ClInclude Include="External\MathGeoLib\Algorithm\Random\LCG.h" />
+    <ClInclude Include="External\MathGeoLib\Algorithm\SAT.h" />
+    <ClInclude Include="External\MathGeoLib\Geometry\AABB.h" />
+    <ClInclude Include="External\MathGeoLib\Geometry\AABB2D.h" />
+    <ClInclude Include="External\MathGeoLib\Geometry\Capsule.h" />
+    <ClInclude Include="External\MathGeoLib\Geometry\Circle.h" />
+    <ClInclude Include="External\MathGeoLib\Geometry\Circle2D.h" />
+    <ClInclude Include="External\MathGeoLib\Geometry\Frustum.h" />
+    <ClInclude Include="External\MathGeoLib\Geometry\GeometryAll.h" />
+    <ClInclude Include="External\MathGeoLib\Geometry\GeomType.h" />
+    <ClInclude Include="External\MathGeoLib\Geometry\HitInfo.h" />
+    <ClInclude Include="External\MathGeoLib\Geometry\KDTree.h" />
+    <ClInclude Include="External\MathGeoLib\Geometry\Line.h" />
+    <ClInclude Include="External\MathGeoLib\Geometry\LineSegment.h" />
+    <ClInclude Include="External\MathGeoLib\Geometry\LineSegment2D.h" />
+    <ClInclude Include="External\MathGeoLib\Geometry\OBB.h" />
+    <ClInclude Include="External\MathGeoLib\Geometry\OBB2D.h" />
+    <ClInclude Include="External\MathGeoLib\Geometry\PBVolume.h" />
+    <ClInclude Include="External\MathGeoLib\Geometry\Plane.h" />
+    <ClInclude Include="External\MathGeoLib\Geometry\Polygon.h" />
+    <ClInclude Include="External\MathGeoLib\Geometry\Polygon2DRef.h" />
+    <ClInclude Include="External\MathGeoLib\Geometry\Polyhedron.h" />
+    <ClInclude Include="External\MathGeoLib\Geometry\QuadTree.h" />
+    <ClInclude Include="External\MathGeoLib\Geometry\Ray.h" />
+    <ClInclude Include="External\MathGeoLib\Geometry\Sphere.h" />
+    <ClInclude Include="External\MathGeoLib\Geometry\Triangle.h" />
+    <ClInclude Include="External\MathGeoLib\Geometry\Triangle2D.h" />
+    <ClInclude Include="External\MathGeoLib\Geometry\TriangleMesh.h" />
+    <ClInclude Include="External\MathGeoLib\MathBuildConfig.h" />
+    <ClInclude Include="External\MathGeoLib\MathGeoLib.h" />
+    <ClInclude Include="External\MathGeoLib\MathGeoLibFwd.h" />
+    <ClInclude Include="External\MathGeoLib\Math\assume.h" />
+    <ClInclude Include="External\MathGeoLib\Math\BitFuncs.h" />
+    <ClInclude Include="External\MathGeoLib\Math\BitOps.h" />
+    <ClInclude Include="External\MathGeoLib\Math\Callstack.h" />
+    <ClInclude Include="External\MathGeoLib\Math\FixedPoint.h" />
+    <ClInclude Include="External\MathGeoLib\Math\float2.h" />
+    <ClInclude Include="External\MathGeoLib\Math\float3.h" />
+    <ClInclude Include="External\MathGeoLib\Math\float3x3.h" />
+    <ClInclude Include="External\MathGeoLib\Math\float3x4.h" />
+    <ClInclude Include="External\MathGeoLib\Math\float4.h" />
+    <ClInclude Include="External\MathGeoLib\Math\float4d.h" />
+    <ClInclude Include="External\MathGeoLib\Math\float4x4.h" />
+    <ClInclude Include="External\MathGeoLib\Math\float4x4_neon.h" />
+    <ClInclude Include="External\MathGeoLib\Math\float4x4_sse.h" />
+    <ClInclude Include="External\MathGeoLib\Math\float4_neon.h" />
+    <ClInclude Include="External\MathGeoLib\Math\float4_sse.h" />
+    <ClInclude Include="External\MathGeoLib\Math\FloatCmp.h" />
+    <ClInclude Include="External\MathGeoLib\Math\grisu3.h" />
+    <ClInclude Include="External\MathGeoLib\Math\InclWindows.h" />
+    <ClInclude Include="External\MathGeoLib\Math\Interpolate.h" />
+    <ClInclude Include="External\MathGeoLib\Math\MathAll.h" />
+    <ClInclude Include="External\MathGeoLib\Math\MathConstants.h" />
+    <ClInclude Include="External\MathGeoLib\Math\MathFunc.h" />
+    <ClInclude Include="External\MathGeoLib\Math\MathLog.h" />
+    <ClInclude Include="External\MathGeoLib\Math\MathNamespace.h" />
+    <ClInclude Include="External\MathGeoLib\Math\MathTypes.h" />
+    <ClInclude Include="External\MathGeoLib\Math\MatrixProxy.h" />
+    <ClInclude Include="External\MathGeoLib\Math\MiniFloat.h" />
+    <ClInclude Include="External\MathGeoLib\Math\MultiLineMacro.h" />
+    <ClInclude Include="External\MathGeoLib\Math\myassert.h" />
+    <ClInclude Include="External\MathGeoLib\Math\Polynomial.h" />
+    <ClInclude Include="External\MathGeoLib\Math\Quat.h" />
+    <ClInclude Include="External\MathGeoLib\Math\quat_simd.h" />
+    <ClInclude Include="External\MathGeoLib\Math\Rect.h" />
+    <ClInclude Include="External\MathGeoLib\Math\Reinterpret.h" />
+    <ClInclude Include="External\MathGeoLib\Math\simd.h" />
+    <ClInclude Include="External\MathGeoLib\Math\SSEMath.h" />
+    <ClInclude Include="External\MathGeoLib\Math\sse_mathfun.h" />
+    <ClInclude Include="External\MathGeoLib\Math\Swap.h" />
+    <ClInclude Include="External\MathGeoLib\Math\TransformOps.h" />
+    <ClInclude Include="External\MathGeoLib\Math\vec2d.h" />
+    <ClInclude Include="External\MathGeoLib\Time\Clock.h" />
+    <ClInclude Include="Source\Globals.h" />
+    <ClInclude Include="Source\Mesh.h" />
+    <ClInclude Include="Source\Model.h" />
+    <ClInclude Include="Source\Module.h" />
+    <ClInclude Include="Source\ModuleCamera.h" />
+    <ClInclude Include="Source\ModuleDebugDraw.h" />
+    <ClInclude Include="Source\ModuleEditor.h" />
+    <ClInclude Include="Source\ModuleEngine.h" />
+    <ClInclude Include="Source\ModuleInput.h" />
+    <ClInclude Include="Source\ModuleProgram.h" />
+    <ClInclude Include="Source\ModuleRender.h" />
+    <ClInclude Include="Source\ModuleRenderExercise.h" />
+    <ClInclude Include="Source\ModuleTexture.h" />
+    <ClInclude Include="Source\ModuleWindow.h" />
+    <ClInclude Include="Source\stb_image.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="External\MathGeoLib\Geometry\KDTree.inl" />
+    <None Include="External\MathGeoLib\Geometry\QuadTree.inl" />
+    <None Include="External\MathGeoLib\Geometry\TriangleMesh_IntersectRay_AVX.inl" />
+    <None Include="External\MathGeoLib\Geometry\TriangleMesh_IntersectRay_CPP.inl" />
+    <None Include="External\MathGeoLib\Geometry\TriangleMesh_IntersectRay_SSE.inl" />
+    <None Include="External\MathGeoLib\Math\float2.inl" />
+    <None Include="External\MathGeoLib\Math\Matrix.inl" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
