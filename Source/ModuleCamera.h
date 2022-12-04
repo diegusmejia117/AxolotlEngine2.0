@@ -47,7 +47,7 @@ public:
 	void Rotate(float i_thetaXRad, float i_thetaYRad, float i_thetaZRad);
 private:
 	Frustum frustum;
-	float velocity = 0.4f;
+	
 
 };
 

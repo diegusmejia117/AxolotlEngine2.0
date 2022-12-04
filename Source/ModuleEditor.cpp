@@ -301,6 +301,16 @@ update_status ModuleEditor::PostUpdate()
 }
 
 
+void ModuleEditor::ModelUploadedWindow(const char* modelPath) 
+{
+
+
+	ImGui::Begin("3D model uploaded");  
+	ImGui::Text(modelPath);
+
+
+}
+
 bool ModuleEditor::CleanUp()
 {
 	ImGui_ImplOpenGL3_Shutdown();

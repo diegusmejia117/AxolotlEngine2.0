@@ -20,6 +20,7 @@ public:
 	update_status Update();
 	update_status PostUpdate();
 	bool CleanUp();
+	void ModelUploadedWindow(const char* modelPath);
 
 private:
 

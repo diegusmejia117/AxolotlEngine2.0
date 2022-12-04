@@ -15,7 +15,7 @@ public:
 	unsigned CompileShader(unsigned type, const char* source);
 	unsigned CreateProgram(unsigned vtx_shader, unsigned frg_shader);
 	void RenderVBO(unsigned vbo, unsigned program);
-	void RenderTriangle(unsigned vbo, unsigned program);
+	void RenderDebug(unsigned vbo, unsigned program);
 	float4x4 model, view, proj;
 
 private:

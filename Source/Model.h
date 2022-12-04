@@ -15,9 +15,11 @@ public:
 	static const std::string s_modelFolderPath;
 
 	static Model* LoadFromFile(std::string i_fileName);
-	std::vector<GLuint> m_textures;
-	std::list<Mesh*> m_meshes;
+	std::vector<GLuint> textures;
+	std::list<Mesh*> meshes;
 	void Draw();
+
+	
 
 private:
 	

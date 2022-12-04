@@ -6,6 +6,7 @@
 #include "ModuleEditor.h"
 #include "ModuleTexture.h"
 
+
 #include "cimport.h"
 #include "postprocess.h"
 
@@ -43,8 +44,8 @@ Model* Model::LoadFromFile(std::string i_fileName)
 
 void Model::Draw()
 {
-	for (std::list<Mesh*>::iterator it = m_meshes.begin(); it != m_meshes.end(); ++it) {
-		(*it)->Draw(m_textures);
+	for (std::list<Mesh*>::iterator it = meshes.begin(); it != meshes.end(); ++it) {
+		(*it)->Draw(textures);
 	}
 }
 
@@ -52,7 +53,7 @@ void Model::LoadMaterials(const aiScene* i_scene)
 {
 	aiString file;
 
-	m_textures.reserve(i_scene->mNumMaterials);
+	textures.reserve(i_scene->mNumMaterials);
 
 	for (unsigned i = 0; i < i_scene->mNumMaterials; ++i)
 	{
@@ -67,6 +68,7 @@ void Model::LoadMeshes(aiMesh** i_meshes, int i_numMeshes)
 {
 	for (int i = 0; i < i_numMeshes; ++i) {
 		Mesh* mesh = Mesh::Load(i_meshes[i]);
-		m_meshes.push_back(mesh);
+		meshes.push_back(mesh);
 	}
 }
+

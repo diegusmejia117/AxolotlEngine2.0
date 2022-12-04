@@ -41,8 +41,8 @@ bool ModuleCamera::Start()
 
 update_status ModuleCamera::Update()
 {
-	const Uint8* keyboard = SDL_GetKeyboardState(NULL);
-	Uint32 SDL_GetMouseState(int* x, int* y);
+	
+	
 
 
 	SDL_Event event;
@@ -133,11 +133,11 @@ void ModuleCamera::LookAt(float3 i_lookAt)
 //	frustum->SetUp(rotationMatrix * oldUp);
 //}
 
-void ModuleCamera::Rotate(float3 i_thetasRad)
+void ModuleCamera::Rotate(float3 rotRad)
 {
-	float3x3 rotationX = float3x3::RotateAxisAngle(frustum.WorldRight(), i_thetasRad.x);
-	float3x3 rotationY = float3x3::RotateY(i_thetasRad.y);
-	float3x3 rotationZ = float3x3::RotateAxisAngle(frustum.Front(), i_thetasRad.z);
+	float3x3 rotationX = float3x3::RotateAxisAngle(frustum.WorldRight(), rotRad.x);
+	float3x3 rotationY = float3x3::RotateY(rotRad.y);
+	float3x3 rotationZ = float3x3::RotateAxisAngle(frustum.Front(), rotRad.z);
 
 	float3x3 rotationMat = rotationY * rotationX * rotationZ;
 
@@ -147,7 +147,6 @@ void ModuleCamera::Rotate(float3 i_thetasRad)
 	float3 oldUp = frustum.Up().Normalized();
 	SetOrientation(rotationMat.MulDir(oldUp));
 }
-
 
 
 

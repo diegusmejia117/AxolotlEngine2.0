@@ -122,7 +122,7 @@ void ModuleProgram::RenderVBO(unsigned vbo, unsigned program)
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
-void ModuleProgram::RenderTriangle(unsigned vbo, unsigned program)
+void ModuleProgram::RenderDebug(unsigned vbo, unsigned program)
 {
 	//Dibujar Quad Babuino
 

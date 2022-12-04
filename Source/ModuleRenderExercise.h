@@ -23,10 +23,11 @@ public:
 	unsigned CreateTriangleVBO();
 	void DestroyVBO(unsigned vbo);
 	unsigned GetProgram();
-
+	void SetModel(const char* modelPath);
+	//void SetModelActive(const Model* newModel);
 private:
 	unsigned vbo;
 	unsigned program;
-	Model* m_model3D;
+	Model* model3D;
 };
 

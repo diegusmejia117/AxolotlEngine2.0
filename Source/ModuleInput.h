@@ -16,12 +16,13 @@ public:
 	bool Init();
 	update_status Update();
 	bool CleanUp();
-
+	//char* droppedFile_dir;
 
 
 	
 
 private:
 	const Uint8 *keyboard = NULL;
-	
+	//Frustum* GetFrustum();
+	float velocity = 0.4f;
 };

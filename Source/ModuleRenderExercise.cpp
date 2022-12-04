@@ -32,7 +32,7 @@ bool ModuleRenderExercise::Start()
 
     program = App->program->CreateProgram(vertexShader, fragmentShader);
 
-    m_model3D = Model::LoadFromFile("models/BakerHouse.fbx");
+    model3D = Model::LoadFromFile("models/BakerHouse.fbx");
 
 
     return true;
@@ -45,9 +45,9 @@ update_status ModuleRenderExercise::PreUpdate()
 
 update_status ModuleRenderExercise::Update()
 {
-    //App->program->RenderVBO(vbo, program);
-    App->program->RenderTriangle(vbo,program);
-    m_model3D->Draw();
+   
+    App->program->RenderDebug(vbo,program);
+    model3D->Draw();
 
     return UPDATE_CONTINUE;
 }
@@ -61,6 +61,21 @@ bool ModuleRenderExercise::CleanUp()
 {
     return false;
 }
+
+void ModuleRenderExercise::SetModel(const char* modelPath)
+{
+    delete model3D;
+    model3D = Model::LoadFromFile(modelPath);
+    
+    //SetModelActive(model3D);
+}
+
+//void SetModelActive(const Model* newModel) 
+//{
+//
+//
+//
+//}
 
 void ModuleRenderExercise::WindowResized(unsigned width, unsigned height)
 {
