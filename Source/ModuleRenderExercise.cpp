@@ -32,7 +32,7 @@ bool ModuleRenderExercise::Start()
 
     program = App->program->CreateProgram(vertexShader, fragmentShader);
 
-    model3D = Model::LoadFromFile("models/BakerHouse.fbx");
+    model3D = Model::FileLoad("models/BakerHouse.fbx");
 
 
     return true;
@@ -65,7 +65,7 @@ bool ModuleRenderExercise::CleanUp()
 void ModuleRenderExercise::SetModel(const char* modelPath)
 {
     delete model3D;
-    model3D = Model::LoadFromFile(modelPath);
+    model3D = Model::FileLoad(modelPath);
     
     //SetModelActive(model3D);
 }

@@ -56,6 +56,20 @@ update_status ModuleInput::Update()
                 break;
 
 
+			case SDL_MOUSEBUTTONUP:
+				
+				if (sdlEvent.button.button == SDL_BUTTON_RIGHT /*&& keyboard[SDL_SCANCODE_RALT]*/) {
+					deltaPos.z -= 0.2f;
+					App->camera->Translate(deltaPos);
+					/*App->camera->SetFOV(-5, 1);*/
+				}
+				/*if (sdlEvent.button.button == SDL_BUTTON_RIGHT && keyboard[SDL_SCANCODE_LALT]) {
+					App->camera->SetFOV(5, 1);
+				}
+				break;*/
+
+
+
 			case SDL_DROPFILE:
 
 				droppedFile_dir = sdlEvent.drop.file;
@@ -93,29 +107,79 @@ update_status ModuleInput::Update()
 
 	if (keyboard[SDL_SCANCODE_W]) {
 
-		deltaPos.z -= 0.2f;
-		App->camera->Translate(deltaPos);
-		
+		if (keyboard[SDL_SCANCODE_LSHIFT]) 
+		{
+			deltaPos.z -= velocity * 2;
+			App->camera->Translate(deltaPos);
+		}
+		else 
+		{
+			deltaPos.z -= velocity;
+			App->camera->Translate(deltaPos);
+		}
 	}
 	if (keyboard[SDL_SCANCODE_S]) {
-		deltaPos.z += 0.2f;
-		App->camera->Translate(deltaPos);
+
+		if (keyboard[SDL_SCANCODE_LSHIFT])
+		{
+			deltaPos.z += velocity * 2;
+			App->camera->Translate(deltaPos);
+		}
+		else
+		{
+			deltaPos.z += velocity;
+			App->camera->Translate(deltaPos);
+		}
 	}
 	if (keyboard[SDL_SCANCODE_Q]) {
-		deltaPos.y += 0.2f;
-		App->camera->Translate(deltaPos);
+		if (keyboard[SDL_SCANCODE_LSHIFT]) {
+			deltaPos.y += velocity * 2;
+			App->camera->Translate(deltaPos);
+		}
+		else 
+		{
+			deltaPos.y += velocity;
+			App->camera->Translate(deltaPos);
+		}
 	}
 	if (keyboard[SDL_SCANCODE_E]) {
-		deltaPos.y -= 0.2f;
-		App->camera->Translate(deltaPos);
+		if(keyboard[SDL_SCANCODE_LSHIFT])
+		{
+			deltaPos.y -= velocity * 2;
+			App->camera->Translate(deltaPos);
+
+		}
+		else 
+		{
+			deltaPos.y -= velocity;
+			App->camera->Translate(deltaPos);
+		}
 	}
 	if (keyboard[SDL_SCANCODE_D]) {
-		deltaPos.x += 0.2f;
-		App->camera->Translate(deltaPos);
+		if (keyboard[SDL_SCANCODE_LSHIFT])
+		{
+			deltaPos.x += velocity * 2;
+			App->camera->Translate(deltaPos);
+		
+		}
+		else 
+		{
+			deltaPos.x += velocity;
+			App->camera->Translate(deltaPos);
+		}
 	}
 	if (keyboard[SDL_SCANCODE_A]) {
-		deltaPos.x -= 0.2f;
-		App->camera->Translate(deltaPos);
+		if (keyboard[SDL_SCANCODE_LSHIFT])
+		{
+			deltaPos.x -= velocity * 2;
+			App->camera->Translate(deltaPos);
+
+		}
+		else
+		{
+			deltaPos.x -= velocity;
+			App->camera->Translate(deltaPos);
+		}
 	}
 
 	if (keyboard[SDL_SCANCODE_F]) {

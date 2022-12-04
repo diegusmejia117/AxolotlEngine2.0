@@ -24,5 +24,5 @@ public:
 private:
 	const Uint8 *keyboard = NULL;
 	//Frustum* GetFrustum();
-	float velocity = 0.4f;
+	float velocity = 0.2f;
 };

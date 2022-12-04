@@ -14,8 +14,8 @@ public:
 
 	static const std::string s_modelFolderPath;
 
-	static Model* LoadFromFile(std::string i_fileName);
-	std::vector<GLuint> textures;
+	static Model* FileLoad(std::string i_fileName);
+	std::vector<GLuint> materialTextures;
 	std::list<Mesh*> meshes;
 	void Draw();
 

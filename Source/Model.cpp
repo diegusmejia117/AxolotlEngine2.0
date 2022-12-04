@@ -20,7 +20,7 @@ Model::~Model()
 {
 }
 
-Model* Model::LoadFromFile(std::string i_fileName)
+Model* Model::FileLoad(std::string i_fileName)
 {
 	Model* model = new Model();
 
@@ -45,7 +45,7 @@ Model* Model::LoadFromFile(std::string i_fileName)
 void Model::Draw()
 {
 	for (std::list<Mesh*>::iterator it = meshes.begin(); it != meshes.end(); ++it) {
-		(*it)->Draw(textures);
+		(*it)->Draw(materialTextures);
 	}
 }
 
@@ -53,13 +53,14 @@ void Model::LoadMaterials(const aiScene* i_scene)
 {
 	aiString file;
 
-	textures.reserve(i_scene->mNumMaterials);
+	materialTextures.reserve(i_scene->mNumMaterials);
 
 	for (unsigned i = 0; i < i_scene->mNumMaterials; ++i)
 	{
+		//GLuint texture = App->texture->LoadTextureFromFile(file.data, m_modelPath);
 		if (i_scene->mMaterials[i]->GetTexture(aiTextureType_DIFFUSE, 0, &file) == AI_SUCCESS)
 		{
-			//m_textures.push_back(App->texture->LoadTextureFromFile(file.data));
+			
 		}
 	}
 }
