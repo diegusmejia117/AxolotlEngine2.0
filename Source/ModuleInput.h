@@ -25,4 +25,5 @@ private:
 	const Uint8 *keyboard = NULL;
 	//Frustum* GetFrustum();
 	float velocity = 0.2f;
+	float rotVelocity = 0.003f;
 };

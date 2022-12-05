@@ -2,6 +2,8 @@
 #include "ModuleWindow.h"
 #include "Application.h"
 #include "ModuleRender.h"
+#include "ModuleCamera.h"
+#include "ModuleInput.h"
 #include "Mesh.h"
 #include "Model.h"
 
@@ -136,12 +138,7 @@ update_status ModuleEditor::Update()
 	static bool show_another_window = false;
 	char gameobName[256] = "GameObject";
 
-	float* ms_log = nullptr;
-	float* fps_log = nullptr;
-	float* stable_fps_log = nullptr;
-	unsigned last_ms_log;
-	int fps_offset;
-	int stable_offset;
+	float3 deltaRot = float3::zero;
 
 
 	if (ImGui::BeginMainMenuBar())
@@ -185,6 +182,8 @@ update_status ModuleEditor::Update()
 			//ImGui::SameLine();
 			//ImGui::InputFloat("X",0.0f*, 0.0f*);
 			ImGui::Text("Rotation");
+			ImGui::SameLine();
+			//ImGui::Text(App->input->deltaRot);
 			ImGui::Text("Scale");
 			
 

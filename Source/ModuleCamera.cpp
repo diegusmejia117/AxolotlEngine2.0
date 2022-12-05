@@ -141,11 +141,11 @@ void ModuleCamera::Rotate(float3 rotRad)
 
 	float3x3 rotationMat = rotationY * rotationX * rotationZ;
 
-	float3 oldFront = frustum.Front().Normalized();
-	LookAt(rotationMat.MulDir(oldFront));
+	float3 Front = frustum.Front().Normalized();
+	LookAt(rotationMat.MulDir(Front));
 
-	float3 oldUp = frustum.Up().Normalized();
-	SetOrientation(rotationMat.MulDir(oldUp));
+	float3 Up = frustum.Up().Normalized();
+	SetOrientation(rotationMat.MulDir(Up));
 }
 
 

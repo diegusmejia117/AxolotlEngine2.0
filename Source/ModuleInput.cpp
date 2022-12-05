@@ -36,8 +36,9 @@ update_status ModuleInput::Update()
     SDL_Event sdlEvent;
 	const Uint8* keyboard = SDL_GetKeyboardState(NULL);
 	Uint32 SDL_GetMouseState(int* x, int* y);
-	//float3 deltaPos = GetFrustum()->Front().Normalized();
+	
 	float3 deltaPos = float3::zero;
+	float3 deltaRot = float3::zero;
 	char* droppedFile_dir;
 
     while (SDL_PollEvent(&sdlEvent) != 0)
@@ -63,12 +64,8 @@ update_status ModuleInput::Update()
 					App->camera->Translate(deltaPos);
 					/*App->camera->SetFOV(-5, 1);*/
 				}
-				/*if (sdlEvent.button.button == SDL_BUTTON_RIGHT && keyboard[SDL_SCANCODE_LALT]) {
-					App->camera->SetFOV(5, 1);
-				}
-				break;*/
-
-
+				
+				break;
 
 			case SDL_DROPFILE:
 
@@ -188,28 +185,28 @@ update_status ModuleInput::Update()
 	
 
 	//rotate camera
-	float3 deltaRot = float3::zero;
-	float deltaAngle = 0.003f;
+	
+	
 	//float deltaAngle = deltaSpeed * deltaTime;
 
-	if (SDL_MOUSEBUTTONDOWN) {
+	
 		if (keyboard[SDL_SCANCODE_LEFT]) {
-			deltaRot.y += deltaAngle;
+			deltaRot.y += rotVelocity;
 			App->camera->Rotate(deltaRot);
 		}
 		if (keyboard[SDL_SCANCODE_RIGHT]) {
-			deltaRot.y -= deltaAngle;
+			deltaRot.y -= rotVelocity;
 			App->camera->Rotate(deltaRot);
 		}
 		if (keyboard[SDL_SCANCODE_UP]) {
-			deltaRot.x += deltaAngle;
+			deltaRot.x += rotVelocity;
 			App->camera->Rotate(deltaRot);
 		}
 		if (keyboard[SDL_SCANCODE_DOWN]) {
-			deltaRot.x -= deltaAngle;
+			deltaRot.x -= rotVelocity;
 			App->camera->Rotate(deltaRot);
 		}
-	}
+	
 	
 	
 	
