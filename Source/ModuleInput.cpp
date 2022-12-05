@@ -26,6 +26,11 @@ bool ModuleInput::Init()
 	SDL_Init(0);
 	SDL_EventState(SDL_DROPFILE, SDL_ENABLE);
 	
+	if (SDL_InitSubSystem(SDL_INIT_EVENTS) < 0)
+	{
+		
+		ret = false;
+	}
 
 	return ret;
 }
@@ -54,18 +59,39 @@ update_status ModuleInput::Update()
             case SDL_WINDOWEVENT:
                 if (sdlEvent.window.event == SDL_WINDOWEVENT_RESIZED || sdlEvent.window.event == SDL_WINDOWEVENT_SIZE_CHANGED)
                     App->renderer->WindowResized(sdlEvent.window.data1, sdlEvent.window.data2);
+
+				if (sdlEvent.window.event == SDL_WINDOWEVENT_CLOSE) {
+					return UPDATE_STOP;
+				}
                 break;
 
 
 			case SDL_MOUSEBUTTONUP:
 				
-				if (sdlEvent.button.button == SDL_BUTTON_RIGHT /*&& keyboard[SDL_SCANCODE_RALT]*/) {
+				if (sdlEvent.button.button == SDL_BUTTON_RIGHT) {
 					deltaPos.z -= 0.2f;
 					App->camera->Translate(deltaPos);
-					/*App->camera->SetFOV(-5, 1);*/
+					
 				}
 				
 				break;
+
+		    case SDL_MOUSEWHEEL:
+
+			if (sdlEvent.wheel.y > 0) // scroll up
+			{
+				deltaPos.z -= 0.2f;
+				App->camera->Translate(deltaPos);
+			}
+
+			else if (sdlEvent.wheel.y < 0) // scroll down
+			{
+				deltaPos.z += 0.2f;
+				App->camera->Translate(deltaPos);
+			}
+
+			break;
+
 
 			case SDL_DROPFILE:
 
@@ -75,24 +101,9 @@ update_status ModuleInput::Update()
 				printf("%s\n", droppedFile_dir);
 				SDL_free(droppedFile_dir);
 
-				break;
+			break;
 				
-			//case SDL_MOUSEWHEEL:
-
-			//	if (sdlEvent.wheel.y > 0) // scroll up
-			//	{
-			//		deltaPos.z -= 0.2f;
-			//		App->camera->Translate(deltaPos);
-			//	}
-
-			//	else if (sdlEvent.wheel.y < 0) // scroll down
-			//	{
-			//		deltaPos.z += 0.2f;
-			//		App->camera->Translate(deltaPos);
-			//	}
-
-			//	break;
-
+		
 			
         }
 		
@@ -185,9 +196,6 @@ update_status ModuleInput::Update()
 	
 
 	//rotate camera
-	
-	
-	//float deltaAngle = deltaSpeed * deltaTime;
 
 	
 		if (keyboard[SDL_SCANCODE_LEFT]) {
