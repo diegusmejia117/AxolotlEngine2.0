@@ -59,9 +59,9 @@ update_status ModuleInput::PreUpdate()
 			if (sdlEvent.window.event == SDL_WINDOWEVENT_RESIZED || sdlEvent.window.event == SDL_WINDOWEVENT_SIZE_CHANGED)
 				App->renderer->WindowResized(sdlEvent.window.data1, sdlEvent.window.data2);
 
-			if (sdlEvent.window.event == SDL_WINDOWEVENT_CLOSE) {
+			/*if (sdlEvent.window.event == SDL_WINDOWEVENT_CLOSE) {
 				return UPDATE_STOP;
-			}
+			}*/
 			break;
 
 
@@ -75,21 +75,41 @@ update_status ModuleInput::PreUpdate()
 
 			break;
 
-		//case SDL_MOUSEWHEEL:
+		case SDL_MOUSEWHEEL:
 
-		//	if (sdlEvent.wheel.y > 0) // scroll up
-		//	{
-		//		deltaPos.z -= 0.2f;
-		//		App->camera->Translate(deltaPos);
-		//	}
+			if (sdlEvent.wheel.y > 0) // scroll up
+			{
+				if (keyboard[SDL_SCANCODE_LSHIFT])
+				{
+					deltaPos.z -= velocity * 2;
+					App->camera->Translate(deltaPos);
+				
+				}
+				else
+				{
+					deltaPos.z -= velocity;
+					App->camera->Translate(deltaPos);
 
-		//	else if (sdlEvent.wheel.y < 0) // scroll down
-		//	{
-		//		deltaPos.z += 0.2f;
-		//		App->camera->Translate(deltaPos);
-		//	}
+				}
+			}
 
-		//	break;
+			else if (sdlEvent.wheel.y < 0) // scroll down
+			{
+				if (keyboard[SDL_SCANCODE_LSHIFT])
+				{
+					deltaPos.z += velocity * 2;
+					App->camera->Translate(deltaPos);
+
+				}
+				else
+				{
+					deltaPos.z += velocity;
+					App->camera->Translate(deltaPos);
+
+				}
+			}
+
+			break;
 
 
 		case SDL_DROPFILE:
