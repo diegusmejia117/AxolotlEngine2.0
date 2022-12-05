@@ -35,82 +35,92 @@ bool ModuleInput::Init()
 	return ret;
 }
 
+update_status ModuleInput::PreUpdate()
+{
+	SDL_Event sdlEvent;
+	const Uint8* keyboard = SDL_GetKeyboardState(NULL);
+	Uint32 SDL_GetMouseState(int* x, int* y);
+	float3 deltaPos = float3::zero;
+	float3 deltaRot = float3::zero;
+	
+	char* droppedFile_dir;
+
+	while (SDL_PollEvent(&sdlEvent) != 0)
+	{
+		ImGui_ImplSDL2_ProcessEvent(&sdlEvent);
+		switch (sdlEvent.type)
+		{
+
+		case SDL_QUIT:
+			return UPDATE_STOP;
+
+			break;
+		case SDL_WINDOWEVENT:
+			if (sdlEvent.window.event == SDL_WINDOWEVENT_RESIZED || sdlEvent.window.event == SDL_WINDOWEVENT_SIZE_CHANGED)
+				App->renderer->WindowResized(sdlEvent.window.data1, sdlEvent.window.data2);
+
+			if (sdlEvent.window.event == SDL_WINDOWEVENT_CLOSE) {
+				return UPDATE_STOP;
+			}
+			break;
+
+
+		case SDL_MOUSEBUTTONUP:
+
+			if (sdlEvent.button.button == SDL_BUTTON_RIGHT) {
+				deltaPos.z -= 0.2f;
+				App->camera->Translate(deltaPos);
+
+			}
+
+			break;
+
+		//case SDL_MOUSEWHEEL:
+
+		//	if (sdlEvent.wheel.y > 0) // scroll up
+		//	{
+		//		deltaPos.z -= 0.2f;
+		//		App->camera->Translate(deltaPos);
+		//	}
+
+		//	else if (sdlEvent.wheel.y < 0) // scroll down
+		//	{
+		//		deltaPos.z += 0.2f;
+		//		App->camera->Translate(deltaPos);
+		//	}
+
+		//	break;
+
+
+		case SDL_DROPFILE:
+
+			droppedFile_dir = sdlEvent.drop.file;
+			App->renderer2->SetModel(droppedFile_dir);
+			App->editor->ModelUploadedWindow(droppedFile_dir);
+			printf("%s\n", droppedFile_dir);
+			SDL_free(droppedFile_dir);
+
+			break;
+		}
+
+	}
+	return UPDATE_CONTINUE;
+}
+
+
+
 // Called every draw update
 update_status ModuleInput::Update()
 {
-    SDL_Event sdlEvent;
+ 
 	const Uint8* keyboard = SDL_GetKeyboardState(NULL);
 	Uint32 SDL_GetMouseState(int* x, int* y);
 	
 	float3 deltaPos = float3::zero;
 	float3 deltaRot = float3::zero;
-	char* droppedFile_dir;
+	
 
-    while (SDL_PollEvent(&sdlEvent) != 0)
-    {
-		ImGui_ImplSDL2_ProcessEvent(&sdlEvent);
-        switch (sdlEvent.type)
-        {
-		
-            case SDL_QUIT:
-                return UPDATE_STOP;
-
-				break;
-            case SDL_WINDOWEVENT:
-                if (sdlEvent.window.event == SDL_WINDOWEVENT_RESIZED || sdlEvent.window.event == SDL_WINDOWEVENT_SIZE_CHANGED)
-                    App->renderer->WindowResized(sdlEvent.window.data1, sdlEvent.window.data2);
-
-				if (sdlEvent.window.event == SDL_WINDOWEVENT_CLOSE) {
-					return UPDATE_STOP;
-				}
-                break;
-
-
-			case SDL_MOUSEBUTTONUP:
-				
-				if (sdlEvent.button.button == SDL_BUTTON_RIGHT) {
-					deltaPos.z -= 0.2f;
-					App->camera->Translate(deltaPos);
-					
-				}
-				
-				break;
-
-		    case SDL_MOUSEWHEEL:
-
-			if (sdlEvent.wheel.y > 0) // scroll up
-			{
-				deltaPos.z -= 0.2f;
-				App->camera->Translate(deltaPos);
-			}
-
-			else if (sdlEvent.wheel.y < 0) // scroll down
-			{
-				deltaPos.z += 0.2f;
-				App->camera->Translate(deltaPos);
-			}
-
-			break;
-
-
-			case SDL_DROPFILE:
-
-				droppedFile_dir = sdlEvent.drop.file;
-				App->renderer2->SetModel(droppedFile_dir);
-				App->editor->ModelUploadedWindow(droppedFile_dir);
-				printf("%s\n", droppedFile_dir);
-				SDL_free(droppedFile_dir);
-
-			break;
-				
-		
-			
-        }
-		
-		
-		
     
-	}
 
 
 	if (keyboard[SDL_SCANCODE_W]) {
