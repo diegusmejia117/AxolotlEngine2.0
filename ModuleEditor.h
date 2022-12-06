@@ -20,6 +20,10 @@ public:
 	update_status Update();
 	update_status PostUpdate();
 	bool CleanUp();
+	inline void ClearConsole() {
+		consoleLogs.clear();
+	}
+
 	void ModelUploadedWindow(const char* modelPath);
 
 private:
@@ -27,13 +31,17 @@ private:
 	int fpsCaptures = 120;
 	int currentIndex = 0;
 	std::vector<float> fpsHistoric;
-	const Model* m_model = nullptr;
+	const Model* model = nullptr;
 
-	std::string m_sdlVersion;
-	std::string m_cpusAndCache;
-	std::string m_ram;
-	std::string m_gpuVendor;
-	std::string m_gpuBrand;
+	std::string sdlVersion;
+	std::string cpusAndCache;
+	std::string ram;
+	std::string gpuVendor;
+	std::string gpuBrand;
+	std::vector<const char*> caps;
+	std::vector<const char*> consoleLogs;
+	bool scrollAuto;
+	bool scrollEnd;
 };
 	
 

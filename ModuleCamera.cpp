@@ -124,14 +124,7 @@ void ModuleCamera::LookAt(float3 i_lookAt)
 //	LookAt(float3(i_x, i_y, i_z));
 //}
 
-//void ModuleCamera::Rotate(const float3x3& rotationMatrix)
-//{
-//	Frustum* frustum = GetFrustum();
-//	vec oldFront = frustum->Front().Normalized();
-//	vec oldUp = frustum->Up().Normalized();
-//	frustum->SetFront(rotationMatrix * oldFront);
-//	frustum->SetUp(rotationMatrix * oldUp);
-//}
+
 
 void ModuleCamera::Rotate(float3 rotRad)
 {

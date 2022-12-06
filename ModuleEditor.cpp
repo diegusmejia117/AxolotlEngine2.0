@@ -57,12 +57,12 @@ bool ModuleEditor::Init()
 
 	//SDL HARDWARE ACCESS
 
-	m_sdlVersion = std::to_string(SDL_MAJOR_VERSION) + "." + std::to_string(SDL_MINOR_VERSION) + "." + std::to_string(SDL_PATCHLEVEL);
+	sdlVersion = std::to_string(SDL_MAJOR_VERSION) + "." + std::to_string(SDL_MINOR_VERSION) + "." + std::to_string(SDL_PATCHLEVEL);
 
 	int cacheSizeInB = SDL_GetCPUCacheLineSize();
 	int cacheSizeInKB = std::ceil(cacheSizeInB / 1000.f);
 	int cacheSizeInKb = cacheSizeInKB * 8;
-	m_cpusAndCache = std::to_string(SDL_GetCPUCount()) + " (Cache: " + std::to_string(cacheSizeInKb) + "kb)";
+	cpusAndCache = std::to_string(SDL_GetCPUCount()) + " (Cache: " + std::to_string(cacheSizeInKb) + "kb)";
 
 	int ramInMB = SDL_GetSystemRAM();
 	float ramInGB = ramInMB / 1000.f;
@@ -72,7 +72,44 @@ bool ModuleEditor::Init()
 	std::string ramInGbOneDecimal = std::to_string(ramInGbOneDecimalAux);
 
 	ramInGbOneDecimal.insert(ramInGbOneDecimal.length() - 1, ".");
-	m_ram = ramInGbOneDecimal + "Gb";
+	ram = ramInGbOneDecimal + "Gb";
+
+	
+	if (SDL_Has3DNow()) {
+		caps.emplace_back("3DNow");
+	}
+	if (SDL_HasAltiVec()) {
+		caps.emplace_back("AltiVec");
+	}
+	if (SDL_HasAVX()) {
+		caps.emplace_back("AVX");
+	}
+	if (SDL_HasAVX2()) {
+		caps.emplace_back("AVX2");
+	}
+	if (SDL_HasMMX()) {
+		caps.emplace_back("MMX");
+	}
+	if (SDL_HasRDTSC()) {
+		caps.emplace_back("RDTSC");
+	}
+	if (SDL_HasSSE()) {
+		caps.emplace_back("SSE");
+	}
+	if (SDL_HasSSE2()) {
+		caps.emplace_back("SSE2");
+	}
+	if (SDL_HasSSE3()) {
+		caps.emplace_back("SSE3");
+	}
+	if (SDL_HasSSE41()) {
+		caps.emplace_back("SSE41");
+	}
+	if (SDL_HasSSE42()) {
+		caps.emplace_back("SSE42");
+	}
+
+	
 
 
 	return true;
@@ -89,10 +126,10 @@ bool ModuleEditor::Start()
 	//GPU STARTUP INFO
 	char glVendor[128];
 	sprintf(glVendor, "%s", glGetString(GL_VENDOR));
-	m_gpuVendor = _strdup(glVendor);
+	gpuVendor = _strdup(glVendor);
 	char glRenderer[128];
 	sprintf(glRenderer, "%s", glGetString(GL_RENDERER));
-	m_gpuBrand = _strdup(glRenderer);
+	gpuBrand = _strdup(glRenderer);
 
 	return true;
 }
@@ -163,112 +200,143 @@ update_status ModuleEditor::Update()
 
 	//ImGui::ShowDemoWindow();
 
-	if (ImGui::Begin(gameobName)) {
+	if (ImGui::Begin("Axolotl Engine")) {
 
 		
 	
 
-		ImGui::Checkbox("Enabled", &show_another_window);
+		
 		ImGui::SameLine();
 		ImGui::InputText("Name", gameobName, 256);
 
 		
 
-		if (ImGui::BeginChild("Transform")) {
 
-			
-
-			ImGui::Text("Position");
-			//ImGui::SameLine();
-			//ImGui::InputFloat("X",0.0f*, 0.0f*);
-			ImGui::Text("Rotation");
-			ImGui::SameLine();
-			//ImGui::Text(App->input->deltaRot);
-			ImGui::Text("Scale");
-			
-
-			
-			ImGui::EndChild;
-		}
-
-		//ImGui::SliderFloat("float", &f, 0.0f, 1.0f);            // Edit 1 float using a slider from 0.0f to 1.0f
-		//ImGui::ColorEdit3("clear color", (float*)&clear_color);
-		//if (ImGui::Button("Button"))                            // Buttons return true when clicked (most widgets return true when edited/activated)
-		//	counter++;
-		//ImGui::SameLine();
-		//ImGui::Text("counter = %d", counter);
-
-
-
-		if (ImGui::BeginChild("Model Data")) {
+		if (ImGui::CollapsingHeader("Model Data")) {
 
 			ImGui::Text("VertexNum:");
 			
 			//ImGui::Text(m_numVertices);
 
 			ImGui::Separator();
-			ImGui::EndChild;
-		}
-
-
-		if (ImGui::BeginChild("HARDWARE INFO")) {
-
-
-			ImGui::Text(("CPU: " + m_cpusAndCache).c_str());
-			ImGui::Text(("System RAM: " + m_ram).c_str());
-
 			
-
-			ImGui::Text(("GPU: " + m_gpuVendor).c_str());
-			ImGui::Text(("Brand: " + m_gpuBrand).c_str());
-
-			ImGui::Separator();
-
-			ImGui::Text(("SDL Version: " + m_sdlVersion).c_str());
-
-
-			ImGui::EndChild;
 		}
+
+
+		if (ImGui::CollapsingHeader("HARDWARE INFO")) {
+
+
+			ImGui::Text(("CPU: " + cpusAndCache).c_str());
+			ImGui::Text(("System RAM: " + ram).c_str());
+			ImGui::Text(("GPU: " + gpuVendor).c_str());
+			ImGui::Text(("Brand: " + gpuBrand).c_str());
+			ImGui::Separator();
+			ImGui::Text(("SDL Version: " + sdlVersion).c_str());
+			ImGui::Separator();
+			ImGui::Text(("Caps"));
+			for (int i = 0; i < caps.size(); i++) {
+				if (i % 4 == 0 && i != 0) {
+					ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%s", caps[i]);
+				}
+				else {
+					ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%s", caps[i]);
+					ImGui::SameLine();
+				}
+			}
+		}
+
+		if (ImGui::CollapsingHeader("FPS"))
+		{
+			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+			float maxFPS = App->GetFPS();
+			ImGui::SliderFloat("Max FPS", &maxFPS, 0.f, 120.f, "%.1f", ImGuiSliderFlags_AlwaysClamp);
+			App->SetFPS(maxFPS);
+
+			int deltaTime = App->GetDeltaTime();
+			fpsHistoric[currentIndex] = 1000.f / deltaTime;
+
+			char title[50];
+			sprintf_s(title, 50, "Framerate %.1f", fpsHistoric[currentIndex]);
+			ImGui::PlotHistogram("##framerate", &fpsHistoric[0], fpsCaptures, 0, title, 0.0f, 120.f, ImVec2(310, 100));
+
+			if (currentIndex < fpsCaptures - 1) {
+				++currentIndex;
+			}
+			else {
+
+				fpsHistoric.erase(fpsHistoric.begin());
+				fpsHistoric.push_back(0);
+			}
+		}
+
+
 
 		ImGui::EndMenu();
 
 		
 	}
 
-	if (ImGui::Begin("FPS")) {
-		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-		float maxFPS = App->GetFPS();
-		ImGui::SliderFloat("Max FPS", &maxFPS, 0.f, 120.f, "%.1f", ImGuiSliderFlags_AlwaysClamp);
-		App->SetFPS(maxFPS);
-
-		int deltaTime = App->GetDeltaTime();
-		fpsHistoric[currentIndex] = 1000.f / deltaTime;
-
-		char title[50];
-		sprintf_s(title, 50, "Framerate %.1f", fpsHistoric[currentIndex]);
-		ImGui::PlotHistogram("##framerate", &fpsHistoric[0], fpsCaptures, 0, title, 0.0f, 120.f, ImVec2(310, 100));
-
-		if (currentIndex < fpsCaptures - 1) {
-			++currentIndex;
-		}
-		else {
-
-			fpsHistoric.erase(fpsHistoric.begin());
-			fpsHistoric.push_back(0);
-		}
-	}
 	
-
-	if (show_another_window)
+	ImGui::SetNextWindowSize(ImVec2(400, 200), ImGuiCond_Always);
+	if (ImGui::Begin("Console"))
 	{
-		ImGui::Begin("Another Window", &show_another_window);   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
-		ImGui::Text("Hello from another window!");
-		if (ImGui::Button("Close Me")) {
-			show_another_window = false;
+
+
+		if (ImGui::Button("Clear console")) { App->editor->ClearConsole(); }
+		ImGui::SameLine();
+		bool copy_to_clipboard = ImGui::Button("Copy to clipboard");
+
+		ImGui::Separator();
+
+		// Options menu
+		if (ImGui::BeginPopup("Options"))
+		{
+			ImGui::Checkbox("Auto-scroll", &scrollAuto);
+			ImGui::EndPopup();
 		}
 
 		
+		const float footer_height_to_reserve = ImGui::GetStyle().ItemSpacing.y + ImGui::GetFrameHeightWithSpacing();
+		if (ImGui::BeginChild("ScrollingRegion", ImVec2(0, -footer_height_to_reserve), false, ImGuiWindowFlags_HorizontalScrollbar))
+		{
+			if (ImGui::BeginPopupContextWindow())
+			{
+				if (ImGui::Selectable("Clear")) ClearConsole();
+				ImGui::EndPopup();
+			}
+
+			ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(4, 1)); // Tighten spacing
+			if (copy_to_clipboard)
+				ImGui::LogToClipboard();
+			for (int i = 0; i < consoleLogs.size(); i++)
+			{
+				const char* item = consoleLogs[i];
+
+				ImVec4 color;
+				bool is_colored = false;
+				if (strstr(item, "[error]")) { color = ImVec4(2.0f, 0.8f, 0.8f, 2.0f); is_colored = true; }
+				else if (strncmp(item, "# ", 2) == 0) { color = ImVec4(2.0f, 0.2f, 0.2f, 2.0f); is_colored = true; }
+				if (is_colored)
+					ImGui::PushStyleColor(ImGuiCol_Text, color);
+				ImGui::TextUnformatted(item);
+				if (is_colored)
+					ImGui::PopStyleColor();
+			}
+			if (copy_to_clipboard)
+				ImGui::LogFinish();
+
+			if (scrollEnd || (scrollAuto && ImGui::GetScrollY() >= ImGui::GetScrollMaxY()))
+				ImGui::SetScrollHereY(1.0f);
+			scrollEnd = false;
+
+			ImGui::PopStyleVar();
+			
+		}
+		ImGui::EndChild();
+
+		ImGui::EndMenu();
 	}
+	
 
 
 	ImGui::End();
