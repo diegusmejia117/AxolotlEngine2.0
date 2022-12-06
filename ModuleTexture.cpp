@@ -28,60 +28,60 @@ ModuleTexture::~ModuleTexture()
 bool ModuleTexture::Start()
 {
 	//////std::string const& path = "assets/baboon.png";
-	//std::string const& path = "assets/Baker_house.png";
-	//HRESULT loadResult;
-	//DirectX::TexMetadata info;
-	//
-	//using convert_t = std::codecvt_utf8<wchar_t>;
-	//std::wstring_convert<convert_t, wchar_t> strconverter;
-	//std::wstring bigPath = strconverter.from_bytes(path);
-	//	
-	//loadResult = LoadFromWICFile(bigPath.c_str(), DirectX::WIC_FLAGS_NONE, &info, *returnImage);
+	/*std::string const& path = "assets/supply_Diffuse.png";
+	HRESULT loadResult;
+	DirectX::TexMetadata info;
+	
+	using convert_t = std::codecvt_utf8<wchar_t>;
+	std::wstring_convert<convert_t, wchar_t> strconverter;
+	std::wstring bigPath = strconverter.from_bytes(path);
+		
+	loadResult = LoadFromWICFile(bigPath.c_str(), DirectX::WIC_FLAGS_NONE, &info, *returnImage);
 
-	//glGenTextures(1, &texture);
+	glGenTextures(1, &texture);
 
-	//glBindTexture(GL_TEXTURE_2D, texture);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glBindTexture(GL_TEXTURE_2D, texture);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 
-	//GLint internalFormat = GL_RGBA8;
-	//GLenum format = GL_RGBA;
-	//GLenum type = GL_UNSIGNED_BYTE;
+	GLint internalFormat = GL_RGBA8;
+	GLenum format = GL_RGBA;
+	GLenum type = GL_UNSIGNED_BYTE;
 
-	//switch (returnImage->GetMetadata().format)
-	//{
-	//case DXGI_FORMAT_R8G8B8A8_UNORM_SRGB:
-	//case DXGI_FORMAT_R8G8B8A8_UNORM:
-	//	internalFormat = GL_RGBA8;
-	//	format = GL_RGBA;
-	//	type = GL_UNSIGNED_BYTE;
-	//	break;
-	//case DXGI_FORMAT_B8G8R8A8_UNORM_SRGB:
-	//case DXGI_FORMAT_B8G8R8A8_UNORM:
-	//	internalFormat = GL_RGBA8;
-	//	format = GL_BGRA;
-	//	type = GL_UNSIGNED_BYTE;
-	//	break;
-	//case DXGI_FORMAT_B5G6R5_UNORM:
-	//	internalFormat = GL_RGB8;
-	//	format = GL_BGR;
-	//	type = GL_UNSIGNED_BYTE;
-	//	break;
-	//default:
-	//	break;
-	//}
-	//
-	//DirectX::ScratchImage image;
-	//DirectX::FlipRotate(returnImage->GetImages(), returnImage->GetImageCount(), returnImage->GetMetadata(), DirectX::TEX_FR_FLIP_VERTICAL, image);
+	switch (returnImage->GetMetadata().format)
+	{
+	case DXGI_FORMAT_R8G8B8A8_UNORM_SRGB:
+	case DXGI_FORMAT_R8G8B8A8_UNORM:
+		internalFormat = GL_RGBA8;
+		format = GL_RGBA;
+		type = GL_UNSIGNED_BYTE;
+		break;
+	case DXGI_FORMAT_B8G8R8A8_UNORM_SRGB:
+	case DXGI_FORMAT_B8G8R8A8_UNORM:
+		internalFormat = GL_RGBA8;
+		format = GL_BGRA;
+		type = GL_UNSIGNED_BYTE;
+		break;
+	case DXGI_FORMAT_B5G6R5_UNORM:
+		internalFormat = GL_RGB8;
+		format = GL_BGR;
+		type = GL_UNSIGNED_BYTE;
+		break;
+	default:
+		break;
+	}
+	
+	DirectX::ScratchImage image;
+	DirectX::FlipRotate(returnImage->GetImages(), returnImage->GetImageCount(), returnImage->GetMetadata(), DirectX::TEX_FR_FLIP_VERTICAL, image);
 
-	//const DirectX::Image* imatge = image.GetImage(0, 0, 0);
-	//
-	//glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, imatge->width, imatge->height, 0, format, type, imatge->pixels);
+	const DirectX::Image* imatge = image.GetImage(0, 0, 0);
+	
+	glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, imatge->width, imatge->height, 0, format, type, imatge->pixels);
 
 
-	//glGenerateMipmap(GL_TEXTURE_2D);
+	glGenerateMipmap(GL_TEXTURE_2D);*/
 
 	
 
@@ -95,7 +95,7 @@ update_status ModuleTexture::Update()
 
 void ModuleTexture::LoadTex(const char* nameTexture, TexID& texData)
 {
-	//std::string const& path = "assets/baboon.png";
+	////std::string const& path = "assets/baboon.png";
 	std::string const& path = nameTexture;
 	HRESULT loadResult;
 	DirectX::TexMetadata info;

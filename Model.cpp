@@ -18,46 +18,55 @@ Model::Model()
 
 Model::~Model()
 {
+	for (int i = 0; i < materialID.size(); i++) {
+		glDeleteTextures(1, &materialID[i].texID);
+	}
+
+	for (int i = 0; i < meshes.size(); i++) {
+		delete meshes[i];
+	}
 }
 
-Model* Model::FileLoad(std::string i_fileName)
+Model* Model::FileLoad(const char* fileName)
 {
 	Model* model = new Model();
 
 	
-	const aiScene* scene = aiImportFile(i_fileName.c_str(), aiProcessPreset_TargetRealtime_MaxQuality);
-
+	const aiScene* scene = aiImportFile(fileName, aiProcessPreset_TargetRealtime_MaxQuality);
+	
 	if (scene)
 	{
 		model->LoadMaterials(scene);
 		model->LoadMeshes(scene->mMeshes, scene->mNumMeshes);
 		aiReleaseImport(scene);
+		
 		return model;
 	}
 	else
 	{
-		std::string errorString = "Error loading " + i_fileName + ": " + aiGetErrorString();
-		//App->editor->OutputToConsole(errorString.c_str());
+		
+		App->editor->consoleLogs.emplace_back("errorLoading");
 		return nullptr;
 	}
 }
 
 void Model::Draw()
 {
-	for (std::list<Mesh*>::iterator it = meshes.begin(); it != meshes.end(); ++it) {
+	for (std::vector<Mesh*>::iterator it = meshes.begin(); it != meshes.end(); ++it) {
 		(*it)->Draw(materialTextures);
 	}
 }
 
-void Model::LoadMaterials(const aiScene* i_scene)
+void Model::LoadMaterials(const aiScene* scene)
 {
 	aiString file;
-	materialTextures.reserve(i_scene->mNumMaterials);
+	materialTextures.reserve(scene->mNumMaterials);
+	App->editor->consoleLogs.emplace_back("Loading textures...");
 
-	for (unsigned i = 0; i < i_scene->mNumMaterials; ++i)
+	for (unsigned i = 0; i < scene->mNumMaterials; ++i)
 	{
 		
-		if (i_scene->mMaterials[i]->GetTexture(aiTextureType_DIFFUSE, 0, &file) == AI_SUCCESS)
+		if (scene->mMaterials[i]->GetTexture(aiTextureType_DIFFUSE, 0, &file) == AI_SUCCESS)
 		{
 			std::string texName = std::string(file.data);
 			const size_t lastSlashIdx = texName.find_last_of("\\/");
@@ -69,15 +78,19 @@ void Model::LoadMaterials(const aiScene* i_scene)
 			TexID texData;
 			App->texture->LoadTex(texName.c_str(), texData);
 			materialID.push_back(texData);
+			App->editor->consoleLogs.emplace_back("Loaded texture");
+			
 		}
 	}
 }
 
 void Model::LoadMeshes(aiMesh** i_meshes, int i_numMeshes)
 {
+	App->editor->consoleLogs.emplace_back("Loading mesh...");
 	for (int i = 0; i < i_numMeshes; ++i) {
 		Mesh* mesh = Mesh::Load(i_meshes[i]);
 		meshes.push_back(mesh);
 	}
+	App->editor->consoleLogs.emplace_back("Loading mesh...");
 }
 

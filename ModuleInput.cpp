@@ -94,7 +94,7 @@ update_status ModuleInput::PreUpdate()
 					}
 					else
 					{
-						deltaPos.x += velocity / 4;
+						deltaPos.x = velocity / 4;
 						App->camera->Translate(deltaPos);
 					}
 

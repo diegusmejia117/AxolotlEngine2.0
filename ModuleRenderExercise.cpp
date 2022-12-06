@@ -32,8 +32,8 @@ bool ModuleRenderExercise::Start()
 
     program = App->program->CreateProgram(vertexShader, fragmentShader);
 
-    model3D = Model::FileLoad("models/BakerHouse.fbx");
-
+    model3D = Model::FileLoad("models/BakerHouse.fbx");    
+    //model3D = Model::FileLoad("models/supply.fbx");
 
     return true;
 }

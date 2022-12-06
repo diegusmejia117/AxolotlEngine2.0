@@ -2,7 +2,7 @@
 
 #include <string>
 #include <list>
-
+#include <vector>
 #include "scene.h"
 #include "ModuleTexture.h"
 #include "Mesh.h"
@@ -14,10 +14,13 @@ public:
 
 	static const std::string s_modelFolderPath;
 
-	static Model* FileLoad(std::string i_fileName);
+	  
+	//static Model* FileLoad(std::string i_fileName);
+	static Model* FileLoad(const char* fileName);
+
 	std::vector<GLuint> materialTextures;
 	std::vector<TexID> materialID;
-	std::list<Mesh*> meshes;
+	std::vector<Mesh*> meshes;
 	void Draw();
 	
 	

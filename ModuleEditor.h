@@ -23,6 +23,7 @@ public:
 	inline void ClearConsole() {
 		consoleLogs.clear();
 	}
+	std::vector<const char*> consoleLogs;
 
 	void ModelUploadedWindow(const char* modelPath);
 
@@ -39,7 +40,7 @@ private:
 	std::string gpuVendor;
 	std::string gpuBrand;
 	std::vector<const char*> caps;
-	std::vector<const char*> consoleLogs;
+	
 	bool scrollAuto;
 	bool scrollEnd;
 };
