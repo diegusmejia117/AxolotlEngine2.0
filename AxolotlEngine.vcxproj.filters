@@ -15,49 +15,49 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Application.cpp">
+    <ClCompile Include="Source\Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="log.cpp">
+    <ClCompile Include="Source\log.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Main.cpp">
+    <ClCompile Include="Source\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Mesh.cpp">
+    <ClCompile Include="Source\Mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Model.cpp">
+    <ClCompile Include="Source\Model.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleCamera.cpp">
+    <ClCompile Include="Source\ModuleCamera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleDebugDraw.cpp">
+    <ClCompile Include="Source\ModuleDebugDraw.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleEditor.cpp">
+    <ClCompile Include="Source\ModuleEditor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleEngine.cpp">
+    <ClCompile Include="Source\ModuleEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleInput.cpp">
+    <ClCompile Include="Source\ModuleInput.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleProgram.cpp">
+    <ClCompile Include="Source\ModuleProgram.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleRender.cpp">
+    <ClCompile Include="Source\ModuleRender.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleRenderExercise.cpp">
+    <ClCompile Include="Source\ModuleRenderExercise.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleTexture.cpp">
+    <ClCompile Include="Source\ModuleTexture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleWindow.cpp">
+    <ClCompile Include="Source\ModuleWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="External\ImGui\Include\GlueCode\imgui_impl_opengl3.cpp">
@@ -209,61 +209,61 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Application.h">
+    <ClInclude Include="Source\Application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="debugdraw.h">
+    <ClInclude Include="Source\debugdraw.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="debug_draw.hpp">
+    <ClInclude Include="Source\debug_draw.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Dummy.h">
+    <ClInclude Include="Source\Dummy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Globals.h">
+    <ClInclude Include="Source\Globals.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh.h">
+    <ClInclude Include="Source\Mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Model.h">
+    <ClInclude Include="Source\Model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Module.h">
+    <ClInclude Include="Source\Module.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleCamera.h">
+    <ClInclude Include="Source\ModuleCamera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleDebugDraw.h">
+    <ClInclude Include="Source\ModuleDebugDraw.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleEditor.h">
+    <ClInclude Include="Source\ModuleEditor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleEngine.h">
+    <ClInclude Include="Source\ModuleEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleInput.h">
+    <ClInclude Include="Source\ModuleInput.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleProgram.h">
+    <ClInclude Include="Source\ModuleProgram.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleRender.h">
+    <ClInclude Include="Source\ModuleRender.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleRenderExercise.h">
+    <ClInclude Include="Source\ModuleRenderExercise.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleTexture.h">
+    <ClInclude Include="Source\ModuleTexture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleWindow.h">
+    <ClInclude Include="Source\ModuleWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="stb_image.h">
+    <ClInclude Include="Source\stb_image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="External\ImGui\Include\GlueCode\imgui_impl_opengl3.h">

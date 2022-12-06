@@ -208,7 +208,7 @@ update_status ModuleEditor::Update()
 
 			ImGui::Text("Model Name");
 			ImGui::SameLine();
-			ImGui::Text(model3D->GetMeshName());
+			//ImGui::Text(model3D->GetMeshName());
 			//ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), model3D->GetMeshName());
 
 			for (Mesh* mesh : model3D->GetMeshInfo()) {
