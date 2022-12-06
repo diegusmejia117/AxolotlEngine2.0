@@ -25,15 +25,13 @@ public:
 	}
 	std::vector<const char*> consoleLogs;
 
-	void ModelUploadedWindow(const char* modelPath);
+	
 
 private:
 
 	int fpsCaptures = 120;
 	int currentIndex = 0;
 	std::vector<float> fpsHistoric;
-	const Model* model = nullptr;
-
 	std::string sdlVersion;
 	std::string cpusAndCache;
 	std::string ram;

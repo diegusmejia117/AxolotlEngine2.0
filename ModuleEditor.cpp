@@ -2,6 +2,7 @@
 #include "ModuleWindow.h"
 #include "Application.h"
 #include "ModuleRender.h"
+#include "ModuleRenderExercise.h"
 #include "ModuleCamera.h"
 #include "ModuleInput.h"
 #include "Mesh.h"
@@ -174,7 +175,7 @@ update_status ModuleEditor::Update()
 	bool show_demo_window = true;
 	static bool show_another_window = false;
 	char gameobName[256] = "GameObject";
-
+	Model* model3D = App->renderer2->GetModel3D();
 	float3 deltaRot = float3::zero;
 
 
@@ -200,50 +201,30 @@ update_status ModuleEditor::Update()
 
 	//ImGui::ShowDemoWindow();
 
-	if (ImGui::Begin("Axolotl Engine")) {
+	if (ImGui::Begin("Axolotl Engine Terminal")) {
 
-		
-	
+		if (ImGui::CollapsingHeader("Mesh INFO"))
+		{
 
-		
-		ImGui::SameLine();
-		ImGui::InputText("Name", gameobName, 256);
+			ImGui::Text("Model Name");
+			ImGui::SameLine();
+			ImGui::Text(model3D->GetMeshName());
+			//ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), model3D->GetMeshName());
 
-		
-
-
-		if (ImGui::CollapsingHeader("Model Data")) {
-
-			ImGui::Text("VertexNum:");
-			
-			//ImGui::Text(m_numVertices);
-
-			ImGui::Separator();
-			
-		}
-
-
-		if (ImGui::CollapsingHeader("HARDWARE INFO")) {
-
-
-			ImGui::Text(("CPU: " + cpusAndCache).c_str());
-			ImGui::Text(("System RAM: " + ram).c_str());
-			ImGui::Text(("GPU: " + gpuVendor).c_str());
-			ImGui::Text(("Brand: " + gpuBrand).c_str());
-			ImGui::Separator();
-			ImGui::Text(("SDL Version: " + sdlVersion).c_str());
-			ImGui::Separator();
-			ImGui::Text(("Caps"));
-			for (int i = 0; i < caps.size(); i++) {
-				if (i % 4 == 0 && i != 0) {
-					ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%s", caps[i]);
-				}
-				else {
-					ImGui::TextColored(ImVec4(1.0f, 1.0f, 0.0f, 1.0f), "%s", caps[i]);
-					ImGui::SameLine();
-				}
+			for (Mesh* mesh : model3D->GetMeshInfo()) {
+				ImGui::Text("Vertex Number:");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), "%u", mesh->GetNumVertices());
+				ImGui::Text("Index Number:");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), "%u", mesh->GetNumIndices());
+				ImGui::Text("Material Index:");
+				ImGui::SameLine();
+				ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), "%u", mesh->GetMaterialIndex());
 			}
+
 		}
+
 
 		if (ImGui::CollapsingHeader("FPS"))
 		{
@@ -269,8 +250,38 @@ update_status ModuleEditor::Update()
 			}
 		}
 
+		
+		if (ImGui::CollapsingHeader("HARDWARE INFO")) 
+		{
 
 
+			ImGui::Text(("CPU: " + cpusAndCache).c_str());
+			ImGui::Text(("System RAM: " + ram).c_str());
+			ImGui::Text(("GPU: " + gpuVendor).c_str());
+			ImGui::Text(("Brand: " + gpuBrand).c_str());
+			ImGui::Separator();
+			ImGui::Text(("SDL Version: " + sdlVersion).c_str());
+			ImGui::Separator();
+			ImGui::Text(("Caps"));
+			for (int i = 0; i < caps.size(); i++) {
+				if (i % 4 == 0 && i != 0) {
+					ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), "%s", caps[i]);
+				}
+				else {
+					ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), "%s", caps[i]);
+					ImGui::SameLine();
+				}
+			}
+		}
+
+		if (ImGui::CollapsingHeader("About"))
+		{
+			ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), "Axolotl Engine");
+			ImGui::SameLine();
+			ImGui::Text("made by Diego Aaron Mejia Ramirez");
+
+		}
+		
 		ImGui::EndMenu();
 
 		
@@ -297,7 +308,7 @@ update_status ModuleEditor::Update()
 
 		
 		const float footer_height_to_reserve = ImGui::GetStyle().ItemSpacing.y + ImGui::GetFrameHeightWithSpacing();
-		if (ImGui::BeginChild("ScrollingRegion", ImVec2(0, -footer_height_to_reserve), false, ImGuiWindowFlags_HorizontalScrollbar))
+		if (ImGui::BeginChild("Console Section", ImVec2(0, -footer_height_to_reserve), false, ImGuiWindowFlags_HorizontalScrollbar))
 		{
 			if (ImGui::BeginPopupContextWindow())
 			{
@@ -305,7 +316,7 @@ update_status ModuleEditor::Update()
 				ImGui::EndPopup();
 			}
 
-			ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(4, 1)); // Tighten spacing
+			ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(4, 1)); 
 			if (copy_to_clipboard)
 				ImGui::LogToClipboard();
 			for (int i = 0; i < consoleLogs.size(); i++)
@@ -368,15 +379,7 @@ update_status ModuleEditor::PostUpdate()
 }
 
 
-void ModuleEditor::ModelUploadedWindow(const char* modelPath) 
-{
 
-
-	ImGui::Begin("3D model uploaded");  
-	ImGui::Text(modelPath);
-
-
-}
 
 bool ModuleEditor::CleanUp()
 {

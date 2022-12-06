@@ -8,10 +8,21 @@ class Mesh
 {
 public:
 	~Mesh();
+	inline const int& GetNumVertices() {
+		return m_numVertices;
+	}
+	inline const int& GetNumIndices() {
+		return m_numVertices;
+	}
+	inline const int& GetMaterialIndex() {
+		return m_materialIndex;
+	}
 
 	static Mesh* Load(const aiMesh* i_mesh);
 
 	void Draw(const std::vector<GLuint>& i_modelTextures);
+
+	
 
 	int m_materialIndex;
 	int m_numVertices;

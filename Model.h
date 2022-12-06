@@ -12,7 +12,21 @@ class Model
 public:
 	~Model();
 
-	static const std::string s_modelFolderPath;
+	//static const std::string modelFolderPath;
+
+	inline const std::vector<Mesh*>& GetMeshInfo()
+	{
+		return meshes;
+
+
+	}
+
+	inline const char* GetMeshName()
+	{
+		
+		return meshName;
+
+	}
 
 	  
 	//static Model* FileLoad(std::string i_fileName);
@@ -21,14 +35,17 @@ public:
 	std::vector<GLuint> materialTextures;
 	std::vector<TexID> materialID;
 	std::vector<Mesh*> meshes;
+	const char* meshName;
 	void Draw();
+	
+
 	
 	
 
 private:
 	
 
-	Model();
+	Model(std::string fileName);
 
 	void LoadMaterials(const aiScene* i_scene);
 	void LoadMeshes(aiMesh** i_meshes, int i_numMeshes);

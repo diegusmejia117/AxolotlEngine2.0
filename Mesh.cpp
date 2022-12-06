@@ -12,6 +12,9 @@ Mesh::Mesh()
 
 Mesh::~Mesh()
 {
+	glDeleteBuffers(1, &m_vbo);
+	glDeleteBuffers(1, &m_ebo);
+	glDeleteVertexArrays(1, &m_vao);
 }
 
 Mesh* Mesh::Load(const aiMesh* i_mesh)
@@ -96,7 +99,7 @@ void Mesh::LoadEBO(const aiMesh* i_mesh)
 
 	for (int i = 0; i < i_mesh->mNumFaces; ++i)
 	{
-		assert(i_mesh->mFaces[i].mNumIndices == 3); // note: assume triangles = 3 indices per face
+		assert(mesh->mFaces[i].mNumIndices == 3); 
 		*(indices++) = i_mesh->mFaces[i].mIndices[0];
 		*(indices++) = i_mesh->mFaces[i].mIndices[1];
 		*(indices++) = i_mesh->mFaces[i].mIndices[2];

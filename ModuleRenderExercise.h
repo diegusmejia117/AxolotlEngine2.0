@@ -14,6 +14,11 @@ public:
 	ModuleRenderExercise();
 	~ModuleRenderExercise();
 
+	inline Model* GetModel3D() {
+		return model3D;
+	}
+
+
 	bool Start();
 	update_status PreUpdate();
 	update_status Update();

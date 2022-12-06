@@ -67,15 +67,10 @@ void ModuleRenderExercise::SetModel(const char* modelPath)
     delete model3D;
     model3D = Model::FileLoad(modelPath);
     
-    //SetModelActive(model3D);
+
 }
 
-//void SetModelActive(const Model* newModel) 
-//{
-//
-//
-//
-//}
+
 
 void ModuleRenderExercise::WindowResized(unsigned width, unsigned height)
 {

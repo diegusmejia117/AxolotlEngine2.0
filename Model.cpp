@@ -12,8 +12,10 @@
 
 
 
-Model::Model()
+Model::Model(std::string filename)
 {
+
+
 }
 
 Model::~Model()
@@ -29,8 +31,8 @@ Model::~Model()
 
 Model* Model::FileLoad(const char* fileName)
 {
-	Model* model = new Model();
-
+	Model* model = new Model(fileName);
+	const char* meshName = fileName;
 	
 	const aiScene* scene = aiImportFile(fileName, aiProcessPreset_TargetRealtime_MaxQuality);
 	
