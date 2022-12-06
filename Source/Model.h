@@ -4,7 +4,7 @@
 #include <list>
 
 #include "scene.h"
-
+#include "ModuleTexture.h"
 #include "Mesh.h"
 
 class Model
@@ -16,9 +16,10 @@ public:
 
 	static Model* FileLoad(std::string i_fileName);
 	std::vector<GLuint> materialTextures;
+	std::vector<TexID> materialID;
 	std::list<Mesh*> meshes;
 	void Draw();
-
+	
 	
 
 private:

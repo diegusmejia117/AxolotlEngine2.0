@@ -52,15 +52,23 @@ void Model::Draw()
 void Model::LoadMaterials(const aiScene* i_scene)
 {
 	aiString file;
-
 	materialTextures.reserve(i_scene->mNumMaterials);
 
 	for (unsigned i = 0; i < i_scene->mNumMaterials; ++i)
 	{
-		//GLuint texture = App->texture->LoadTextureFromFile(file.data, m_modelPath);
+		
 		if (i_scene->mMaterials[i]->GetTexture(aiTextureType_DIFFUSE, 0, &file) == AI_SUCCESS)
 		{
-			
+			std::string texName = std::string(file.data);
+			const size_t lastSlashIdx = texName.find_last_of("\\/");
+			if (std::string::npos != lastSlashIdx)
+			{
+				texName.erase(0, lastSlashIdx + 1);
+			}
+			texName = "assets/" + texName;
+			TexID texData;
+			App->texture->LoadTex(texName.c_str(), texData);
+			materialID.push_back(texData);
 		}
 	}
 }

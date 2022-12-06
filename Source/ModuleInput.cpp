@@ -65,15 +65,76 @@ update_status ModuleInput::PreUpdate()
 			break;
 
 
-		case SDL_MOUSEBUTTONUP:
+		
 
-			if (sdlEvent.button.button == SDL_BUTTON_RIGHT) {
-				deltaPos.z -= 0.2f;
-				App->camera->Translate(deltaPos);
+		case SDL_MOUSEMOTION:
+
+			if (sdlEvent.motion.state == SDL_BUTTON_MMASK)
+			{
+				if(sdlEvent.motion.xrel < 0)
+				{
+					if (keyboard[SDL_SCANCODE_LSHIFT])
+					{
+						deltaPos.x -= velocity / 2 ;
+						App->camera->Translate(deltaPos);
+					}
+					else
+					{
+						deltaPos.x -= velocity / 4;
+						App->camera->Translate(deltaPos);
+					}
+				}
+
+				if (sdlEvent.motion.xrel > 0)
+				{
+					if (keyboard[SDL_SCANCODE_LSHIFT])
+					{
+						deltaPos.x += velocity / 2;
+						App->camera->Translate(deltaPos);
+					}
+					else
+					{
+						deltaPos.x += velocity / 4;
+						App->camera->Translate(deltaPos);
+					}
+
+				}
+
+				if (sdlEvent.motion.yrel > 0)
+				{
+					if (keyboard[SDL_SCANCODE_LSHIFT])
+					{
+						deltaPos.y += velocity / 2;
+						App->camera->Translate(deltaPos);
+					}
+					else
+					{
+						deltaPos.y += velocity / 4;
+						App->camera->Translate(deltaPos);
+					}
+
+				}
+
+				if (sdlEvent.motion.yrel < 0)
+				{
+					if (keyboard[SDL_SCANCODE_LSHIFT])
+					{
+						deltaPos.y -= velocity / 4;
+						App->camera->Translate(deltaPos);
+					}
+					else
+					{
+						deltaPos.y -= velocity / 2;
+						App->camera->Translate(deltaPos);
+					}
+
+				}
 
 			}
 
 			break;
+
+
 
 		case SDL_MOUSEWHEEL:
 
