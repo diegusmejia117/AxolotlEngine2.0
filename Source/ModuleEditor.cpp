@@ -139,8 +139,8 @@ bool ModuleEditor::Start()
 
 update_status ModuleEditor::PreUpdate()
 {
-	bool show_demo_window = true;
-	bool show_another_window = false;
+	/*bool show_demo_window = true;
+	bool show_another_window = false;*/
 
 
 	SDL_Event event;
@@ -166,193 +166,331 @@ update_status ModuleEditor::PreUpdate()
 update_status ModuleEditor::Update()
 {
 
-	//ImGui::CaptureMouseFromApp(true);
-	//ImGui::CaptureKeyboardFromApp(true);
+	
 
 	static float f = 0.0f;
 	static int counter = 0;
 	ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-	bool show_demo_window = true;
-	static bool show_another_window = false;
-	char gameobName[256] = "GameObject";
+	
+	static bool showTerminal = true;
+	static bool showConfig = true;
+	static bool showMeshInfo = true;
+	static bool showFPS = true;
+	static bool showHardwareInfo = true;
+	static bool showAbout = true;
+	static bool showConsole = true;
+
+	static bool fullScreen = false;
+	static bool reSize = true;
+	static bool borderLess = false;
+
+	
 	Model* model3D = App->renderer2->GetModel3D();
-	float3 deltaRot = float3::zero;
+	
 
 
 	if (ImGui::BeginMainMenuBar())
 	{
-		if (ImGui::BeginMenu("File"))
+		if (ImGui::BeginMenu("Window"))
 		{
-			//ShowExampleMenuFile();
+
+			if (ImGui::MenuItem("Enable", "MeshInfo"))
+			{ 
+				if (showMeshInfo)
+				{
+					showMeshInfo = false;
+				}
+				else
+				{
+					showMeshInfo = true;
+				}
+			}
+
+			if (ImGui::MenuItem("Enable", "FPS"))
+			{
+				if (showFPS)
+				{
+					showFPS = false;
+				}
+				else
+				{
+					showFPS = true;
+				}
+			}
+
+			if (ImGui::MenuItem("Enable", "Hardware Info"))
+			{
+				if (showHardwareInfo)
+				{
+					showHardwareInfo = false;
+				}
+				else
+				{
+					showHardwareInfo = true;
+				}
+			}
+
+			if (ImGui::MenuItem("Enable", "About"))
+			{
+				if (showAbout)
+				{
+					showAbout = false;
+				}
+				else
+				{
+					showAbout = true;
+				}
+			}
+
+			if (ImGui::MenuItem("Enable", "Console"))
+			{
+				if (showConsole)
+				{
+					showConsole = false;
+				}
+				else
+				{
+					showConsole = true;
+				}
+			}
+
+
 			ImGui::EndMenu();
 		}
-		if (ImGui::BeginMenu("Edit"))
+		if (ImGui::BeginMenu("Controls"))
 		{
-			if (ImGui::MenuItem("Undo", "CTRL+Z")) {}
-			if (ImGui::MenuItem("Redo", "CTRL+Y", false, false)) {}  // Disabled item
+			if (ImGui::MenuItem("Move", "WASD")) { }
+			if (ImGui::MenuItem("Rotate Camera", "Directional Arrows")) {}
+			if (ImGui::MenuItem("Increase Speed", "Hold LSHIFT + WASD")) {}
 			ImGui::Separator();
-			if (ImGui::MenuItem("Cut", "CTRL+X")) {}
-			if (ImGui::MenuItem("Copy", "CTRL+C")) {}
-			if (ImGui::MenuItem("Paste", "CTRL+V")) {}
+			if (ImGui::MenuItem("Pan Camera", "MiddleMouseButton + Mouse Movement")) {}
+			if (ImGui::MenuItem("Zoom", "Mouse Wheel Scroll + UP/DOWN")) {}
+
 			ImGui::EndMenu();
+
+			ImGui::EndMainMenuBar();
 		}
-		ImGui::EndMainMenuBar();
 	}
 
 	//ImGui::ShowDemoWindow();
 
-	if (ImGui::Begin("Axolotl Engine Terminal")) {
+	ImGui::SetNextWindowSize(ImVec2(420, 500), ImGuiCond_Always);
 
-		if (ImGui::CollapsingHeader("Mesh INFO"))
-		{
-
-			ImGui::Text("Model Name");
-			ImGui::SameLine();
-			//ImGui::Text(model3D->GetMeshName());
-			//ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), model3D->GetMeshName());
-
-			for (Mesh* mesh : model3D->GetMeshInfo()) {
-				ImGui::Text("Vertex Number:");
-				ImGui::SameLine();
-				ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), "%u", mesh->GetNumVertices());
-				ImGui::Text("Index Number:");
-				ImGui::SameLine();
-				ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), "%u", mesh->GetNumIndices());
-				ImGui::Text("Material Index:");
-				ImGui::SameLine();
-				ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), "%u", mesh->GetMaterialIndex());
-			}
-
-		}
-
-
-		if (ImGui::CollapsingHeader("FPS"))
-		{
-			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-			float maxFPS = App->GetFPS();
-			ImGui::SliderFloat("Max FPS", &maxFPS, 0.f, 120.f, "%.1f", ImGuiSliderFlags_AlwaysClamp);
-			App->SetFPS(maxFPS);
-
-			int deltaTime = App->GetDeltaTime();
-			fpsHistoric[currentIndex] = 1000.f / deltaTime;
-
-			char title[50];
-			sprintf_s(title, 50, "Framerate %.1f", fpsHistoric[currentIndex]);
-			ImGui::PlotHistogram("##framerate", &fpsHistoric[0], fpsCaptures, 0, title, 0.0f, 120.f, ImVec2(310, 100));
-
-			if (currentIndex < fpsCaptures - 1) {
-				++currentIndex;
-			}
-			else {
-
-				fpsHistoric.erase(fpsHistoric.begin());
-				fpsHistoric.push_back(0);
-			}
-		}
-
-		
-		if (ImGui::CollapsingHeader("HARDWARE INFO")) 
-		{
-
-
-			ImGui::Text(("CPU: " + cpusAndCache).c_str());
-			ImGui::Text(("System RAM: " + ram).c_str());
-			ImGui::Text(("GPU: " + gpuVendor).c_str());
-			ImGui::Text(("Brand: " + gpuBrand).c_str());
-			ImGui::Separator();
-			ImGui::Text(("SDL Version: " + sdlVersion).c_str());
-			ImGui::Separator();
-			ImGui::Text(("Caps"));
-			for (int i = 0; i < caps.size(); i++) {
-				if (i % 4 == 0 && i != 0) {
-					ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), "%s", caps[i]);
-				}
-				else {
-					ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), "%s", caps[i]);
-					ImGui::SameLine();
-				}
-			}
-		}
-
-		if (ImGui::CollapsingHeader("About"))
-		{
-			ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), "Axolotl Engine");
-			ImGui::SameLine();
-			ImGui::Text("made by Diego Aaron Mejia Ramirez");
-
-		}
-		
-		ImGui::EndMenu();
-
-		
-	}
-
-	
-	ImGui::SetNextWindowSize(ImVec2(400, 200), ImGuiCond_Always);
-	if (ImGui::Begin("Console"))
+	if (showTerminal)
 	{
 
+		if (ImGui::Begin("Axolotl Engine Terminal", &showTerminal)) {
 
-		if (ImGui::Button("Clear console")) { App->editor->ClearConsole(); }
-		ImGui::SameLine();
-		bool copy_to_clipboard = ImGui::Button("Copy to clipboard");
-
-		ImGui::Separator();
-
-		// Options menu
-		if (ImGui::BeginPopup("Options"))
-		{
-			ImGui::Checkbox("Auto-scroll", &scrollAuto);
-			ImGui::EndPopup();
-		}
-
-		
-		const float footer_height_to_reserve = ImGui::GetStyle().ItemSpacing.y + ImGui::GetFrameHeightWithSpacing();
-		if (ImGui::BeginChild("Console Section", ImVec2(0, -footer_height_to_reserve), false, ImGuiWindowFlags_HorizontalScrollbar))
-		{
-			if (ImGui::BeginPopupContextWindow())
+			if (showConfig)
 			{
-				if (ImGui::Selectable("Clear")) ClearConsole();
-				ImGui::EndPopup();
+				if (ImGui::CollapsingHeader("Configuration", &showConfig))
+				{
+					ImGui::Checkbox("MeshInfo", &showMeshInfo);
+					ImGui::SameLine();
+					ImGui::Checkbox("FPS", &showFPS);
+					ImGui::SameLine();
+					ImGui::Checkbox("Hardware Info", &showHardwareInfo);
+					ImGui::SameLine();
+					ImGui::Checkbox("About", &showAbout);
+					ImGui::SameLine();
+					ImGui::Checkbox("Console", &showConsole);
+
+					if (ImGui::Checkbox("Fullscreen", &fullScreen))
+					{
+						App->window->SetFullScreen(fullScreen);
+					}
+					ImGui::SameLine();
+
+					if (ImGui::Checkbox("Resizable", &reSize))
+					{
+						App->window->SetFullScreen(reSize);
+					}
+					ImGui::SameLine();
+
+					if (ImGui::Checkbox("Borderless", &borderLess))
+					{
+						App->window->SetFullScreen(borderLess);
+					}
+
+				}
+
 			}
 
-			ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(4, 1)); 
-			if (copy_to_clipboard)
-				ImGui::LogToClipboard();
-			for (int i = 0; i < consoleLogs.size(); i++)
+			if (showMeshInfo)
 			{
-				const char* item = consoleLogs[i];
+				if (ImGui::CollapsingHeader("Mesh INFO", &showMeshInfo))
+				{
 
-				ImVec4 color;
-				bool is_colored = false;
-				if (strstr(item, "[error]")) { color = ImVec4(2.0f, 0.8f, 0.8f, 2.0f); is_colored = true; }
-				else if (strncmp(item, "# ", 2) == 0) { color = ImVec4(2.0f, 0.2f, 0.2f, 2.0f); is_colored = true; }
-				if (is_colored)
-					ImGui::PushStyleColor(ImGuiCol_Text, color);
-				ImGui::TextUnformatted(item);
-				if (is_colored)
-					ImGui::PopStyleColor();
+					ImGui::Text("Model Name");
+					ImGui::SameLine();
+					//ImGui::Text(model3D->GetMeshName());
+					//ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), model3D->GetMeshName());
+
+					for (Mesh* mesh : model3D->GetMeshInfo())
+					{
+						ImGui::Text("Vertex Number:");
+						ImGui::SameLine();
+						ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), "%u", mesh->GetNumVertices());
+						ImGui::Text("Index Number:");
+						ImGui::SameLine();
+						ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), "%u", mesh->GetNumIndices());
+						ImGui::Text("Material Index:");
+						ImGui::SameLine();
+						ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), "%u", mesh->GetMaterialIndex());
+					}
+
+				}
 			}
-			if (copy_to_clipboard)
-				ImGui::LogFinish();
 
-			if (scrollEnd || (scrollAuto && ImGui::GetScrollY() >= ImGui::GetScrollMaxY()))
-				ImGui::SetScrollHereY(1.0f);
-			scrollEnd = false;
+			if (showFPS)
+			{
 
-			ImGui::PopStyleVar();
-			
+				if (ImGui::CollapsingHeader("FPS", &showFPS))
+				{
+					ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+					float maxFPS = App->GetFPS();
+					ImGui::SliderFloat("Max FPS", &maxFPS, 0.f, 120.f, "%.1f", ImGuiSliderFlags_AlwaysClamp);
+					App->SetFPS(maxFPS);
+
+					int deltaTime = App->GetDeltaTime();
+					fpsHistoric[currentIndex] = 1000.f / deltaTime;
+
+					char title[50];
+					sprintf_s(title, 50, "Framerate %.1f", fpsHistoric[currentIndex]);
+					ImGui::PlotHistogram("##framerate", &fpsHistoric[0], fpsCaptures, 0, title, 0.0f, 120.f, ImVec2(310, 100));
+
+					if (currentIndex < fpsCaptures - 1)
+					{
+						++currentIndex;
+					}
+					else
+					{
+
+						fpsHistoric.erase(fpsHistoric.begin());
+						fpsHistoric.push_back(0);
+					}
+				}
+			}
+
+			if (showHardwareInfo)
+			{
+
+				if (ImGui::CollapsingHeader("HARDWARE INFO", &showHardwareInfo))
+				{
+
+
+					ImGui::Text(("CPU: " + cpusAndCache).c_str());
+					ImGui::Text(("System RAM: " + ram).c_str());
+					ImGui::Text(("GPU: " + gpuVendor).c_str());
+					ImGui::Text(("Brand: " + gpuBrand).c_str());
+					ImGui::Separator();
+					ImGui::Text(("SDL Version: " + sdlVersion).c_str());
+					ImGui::Separator();
+					ImGui::Text(("Caps"));
+					for (int i = 0; i < caps.size(); i++)
+					{
+						if (i % 4 == 0 && i != 0)
+						{
+							ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), "%s", caps[i]);
+						}
+						else
+						{
+							ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), "%s", caps[i]);
+							ImGui::SameLine();
+						}
+					}
+				}
+			}
+
+
+			if (showAbout)
+			{
+				if (ImGui::CollapsingHeader("About", &showAbout))
+				{
+					ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), "Axolotl Engine");
+					ImGui::SameLine();
+					ImGui::Text("made by Diego Aaron Mejia Ramirez");
+
+				}
+			}
+			ImGui::EndMenu();
+
+
 		}
-		ImGui::EndChild();
+
+
+		ImGui::SetNextWindowSize(ImVec2(420, 200), ImGuiCond_Always);
+
+		if (showConsole)
+		{
+
+			if (ImGui::Begin("Console", &showConsole))
+			{
+				if (ImGui::BeginPopup("Options"))
+				{
+					ImGui::Checkbox("Auto", &scrollAuto);
+					ImGui::EndPopup();
+				}
+
+				if (ImGui::Button("Clear console")) { App->editor->ClearConsole(); }
+				ImGui::SameLine();
+				bool copy_to_clipboard = ImGui::Button("Copy to clipboard");
+
+				ImGui::Separator();
+
+
+
+
+
+				const float footer_height_to_reserve = ImGui::GetStyle().ItemSpacing.y + ImGui::GetFrameHeightWithSpacing();
+				if (ImGui::BeginChild("Console Section", ImVec2(0, -footer_height_to_reserve), false, ImGuiWindowFlags_HorizontalScrollbar))
+				{
+
+
+					ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(3, 1));
+					if (copy_to_clipboard)
+						ImGui::LogToClipboard();
+					for (int i = 0; i < consoleLogs.size(); i++)
+					{
+						const char* log = consoleLogs[i];
+
+						ImVec4 color;
+						bool is_colored = false;
+						if (strstr(log, "/error/")) { color = ImVec4(2.0f, 0.8f, 0.8f, 2.0f); is_colored = true; }
+						else if (strncmp(log, "# ", 2) == 0) { color = ImVec4(2.0f, 0.2f, 0.2f, 2.0f); is_colored = true; }
+						if (is_colored)
+							ImGui::PushStyleColor(ImGuiCol_Text, color);
+						ImGui::TextUnformatted(log);
+						if (is_colored)
+							ImGui::PopStyleColor();
+					}
+					if (copy_to_clipboard)
+						ImGui::LogFinish();
+
+					if (scrollEnd || (scrollAuto && ImGui::GetScrollY() >= ImGui::GetScrollMaxY()))
+						ImGui::SetScrollHereY(1.0f);
+					scrollEnd = false;
+
+					ImGui::PopStyleVar();
+
+
+				}
+
+				ImGui::EndChild();
+			}
+
+		}
+
+
+
 
 		ImGui::EndMenu();
+
+		ImGui::End();
+
+		return UPDATE_CONTINUE;
+
 	}
-	
-
-
-	ImGui::End();
-
-	return UPDATE_CONTINUE;
 }
 
 update_status ModuleEditor::PostUpdate()

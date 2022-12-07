@@ -24,7 +24,7 @@ public:
 		consoleLogs.clear();
 	}
 	std::vector<const char*> consoleLogs;
-
+	const bool showMeshInfo = false;
 	
 
 private:

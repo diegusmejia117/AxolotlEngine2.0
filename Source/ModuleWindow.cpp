@@ -61,6 +61,25 @@ bool ModuleWindow::Init()
 	return ret;
 }
 
+
+void ModuleWindow::SetFullScreen(bool fs)
+{
+	fs ? SDL_SetWindowFullscreen(window, SDL_TRUE) : SDL_SetWindowFullscreen(window, SDL_FALSE);
+}
+
+void ModuleWindow::SetBorderless(bool br)
+{
+	br ? SDL_SetWindowBordered(window, SDL_FALSE) : SDL_SetWindowBordered(window, SDL_TRUE);
+}
+
+void ModuleWindow::SetResizable(bool resize)
+{
+	resize ? SDL_SetWindowResizable(window, SDL_TRUE) : SDL_SetWindowResizable(window, SDL_FALSE);
+}
+
+
+
+
 // Called before quitting
 bool ModuleWindow::CleanUp()
 {

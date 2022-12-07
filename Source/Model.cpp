@@ -93,6 +93,6 @@ void Model::LoadMeshes(aiMesh** i_meshes, int i_numMeshes)
 		Mesh* mesh = Mesh::Load(i_meshes[i]);
 		meshes.push_back(mesh);
 	}
-	App->editor->consoleLogs.emplace_back("Loading mesh...");
+	App->editor->consoleLogs.emplace_back("Loaded mesh...");
 }
 
