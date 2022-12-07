@@ -12,7 +12,7 @@ class Model
 public:
 	~Model();
 
-	//static const std::string modelFolderPath;
+	static const std::string FBXfolderPath;
 
 	inline const std::vector<Mesh*>& GetMeshInfo()
 	{
@@ -21,7 +21,7 @@ public:
 
 	}
 
-	inline const char* GetMeshName()
+	inline std::string GetMeshName()
 	{
 		
 		return meshName;
@@ -35,7 +35,7 @@ public:
 	std::vector<GLuint> materialTextures;
 	std::vector<TexID> materialID;
 	std::vector<Mesh*> meshes;
-	const char* meshName;
+	std::string meshName;
 	void Draw();
 	
 

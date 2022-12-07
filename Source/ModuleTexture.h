@@ -18,10 +18,13 @@ public:
 	ModuleTexture();
 	~ModuleTexture();
 
+
 	bool            Start();
 	update_status   Update();
 	bool            CleanUp();
-	void LoadTex(const char* nameTexture, TexID& texData);
+	void LoadTex(std::string nameTexture, TexID& texData);
+
+	static const std::string texFolderPath;
 
 	GLuint GetTexture();
 

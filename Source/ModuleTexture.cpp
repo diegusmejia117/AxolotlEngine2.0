@@ -17,6 +17,8 @@
 #include "stb_image.h"
 using namespace std;
 
+const std::string ModuleTexture:: texFolderPath = "assets/";
+
 ModuleTexture::ModuleTexture()
 {
 }
@@ -28,7 +30,7 @@ ModuleTexture::~ModuleTexture()
 bool ModuleTexture::Start()
 {
 	//////std::string const& path = "assets/baboon.png";
-	/*std::string const& path = "assets/supply_Diffuse.png";
+	std::string const& path = "assets/Textures/Baker_house.png";
 	HRESULT loadResult;
 	DirectX::TexMetadata info;
 	
@@ -81,7 +83,7 @@ bool ModuleTexture::Start()
 	glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, imatge->width, imatge->height, 0, format, type, imatge->pixels);
 
 
-	glGenerateMipmap(GL_TEXTURE_2D);*/
+	glGenerateMipmap(GL_TEXTURE_2D);
 
 	
 
@@ -93,16 +95,19 @@ update_status ModuleTexture::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModuleTexture::LoadTex(const char* nameTexture, TexID& texData)
+void ModuleTexture::LoadTex(std::string nameTexture, TexID& texData)
 {
-	////std::string const& path = "assets/baboon.png";
-	std::string const& path = nameTexture;
+	// CODE INTENDED TO SEARCH FOR TEXTURE (COULDN'T MAKE IT WORK), COMMENTED IT SO DROP IN  MESH FUNCTIONALITY MAY WORK
+
+	//////std::string const& path = "assets/baboon.png";
+	/*std::string const& path = nameTexture;
 	HRESULT loadResult;
 	DirectX::TexMetadata info;
 
 	using convert_t = std::codecvt_utf8<wchar_t>;
 	std::wstring_convert<convert_t, wchar_t> strconverter;
-	std::wstring bigPath = strconverter.from_bytes(path);
+	
+	std::wstring bigPath = std::wstring(nameTexture.begin(), nameTexture.end());
 
 	loadResult = LoadFromDDSFile(bigPath.c_str(), DirectX::DDS_FLAGS_NONE, NULL, *returnImage);
 	if (loadResult < 0)
@@ -115,9 +120,6 @@ void ModuleTexture::LoadTex(const char* nameTexture, TexID& texData)
 		}
 
 	}
-
-	
-	
 
 	glGenTextures(1, &texture);
 
@@ -163,7 +165,7 @@ void ModuleTexture::LoadTex(const char* nameTexture, TexID& texData)
 	glGenerateMipmap(GL_TEXTURE_2D);
 
 	texData.texID = texture;
-	texData.texPath = nameTexture;
+	texData.texPath = nameTexture;*/
 
 	
 

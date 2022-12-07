@@ -411,6 +411,14 @@ update_status ModuleEditor::Update()
 					ImGui::SameLine();
 					ImGui::Text("made by Diego Aaron Mejia Ramirez");
 
+					ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), "Barcelona, Spain");
+					ImGui::SameLine();
+					ImGui::Text("2022");
+
+					ImGui::TextColored(ImVec4(0.0f, 1.0f, 1.0f, 1.0f), "Github repository:");
+					
+					ImGui::Text("https://github.com/diegusmejia117/AxolotlEngine2.0");
+
 				}
 			}
 			ImGui::EndMenu();

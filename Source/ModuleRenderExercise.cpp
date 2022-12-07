@@ -22,18 +22,18 @@ bool ModuleRenderExercise::Start()
 	
     vbo = CreateTriangleVBO();
     //vertex shader
-    char* vertexSource = App->program->LoadShaderSource("Shaders/default_vertex.glsl");
+    char* vertexSource = App->program->LoadShaderSource("assets/Shaders/default_vertex.glsl");
     unsigned int vertexShader = App->program->CompileShader(GL_VERTEX_SHADER, vertexSource);
 
     //fragment shader
-    char* fragment = App->program->LoadShaderSource("Shaders/default_fragment.glsl");
+    char* fragment = App->program->LoadShaderSource("assets/Shaders/default_fragment.glsl");
     unsigned int fragmentShader = App->program->CompileShader(GL_FRAGMENT_SHADER, fragment);
 
 
     program = App->program->CreateProgram(vertexShader, fragmentShader);
 
-    model3D = Model::FileLoad("models/BakerHouse.fbx");    
-    //model3D = Model::FileLoad("models/supply.fbx");
+    model3D = Model::FileLoad((Model::FBXfolderPath + "BakerHouse.fbx").c_str());    
+    //model3D = Model::FileLoad("supply.fbx");
 
     return true;
 }

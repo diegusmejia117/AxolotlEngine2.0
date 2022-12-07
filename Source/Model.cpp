@@ -10,11 +10,10 @@
 #include "cimport.h"
 #include "postprocess.h"
 
-
-
+const std::string Model::FBXfolderPath = "assets/models/";
 Model::Model(std::string filename)
 {
-
+	
 
 }
 
@@ -32,7 +31,7 @@ Model::~Model()
 Model* Model::FileLoad(const char* fileName)
 {
 	Model* model = new Model(fileName);
-	const char* meshName = fileName;
+	std::string meshName = fileName;
 	
 	const aiScene* scene = aiImportFile(fileName, aiProcessPreset_TargetRealtime_MaxQuality);
 	
@@ -63,7 +62,7 @@ void Model::LoadMaterials(const aiScene* scene)
 {
 	aiString file;
 	materialTextures.reserve(scene->mNumMaterials);
-	App->editor->consoleLogs.emplace_back("Loading textures...");
+	App->editor->consoleLogs.emplace_back("Loading texture...");
 
 	for (unsigned i = 0; i < scene->mNumMaterials; ++i)
 	{
@@ -80,7 +79,14 @@ void Model::LoadMaterials(const aiScene* scene)
 			TexID texData;
 			App->texture->LoadTex(texName.c_str(), texData);
 			materialID.push_back(texData);
-			App->editor->consoleLogs.emplace_back("Loaded texture");
+
+			//GLuint texture = App->texture->LoadTex(file.data, meshName);
+			//if (texture == -1) {
+			//	//texture failed to load, exit
+			//	return;
+			//}
+			//materialTextures.push_back(texture);
+			//App->editor->consoleLogs.emplace_back("Loaded texture");
 			
 		}
 	}

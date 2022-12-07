@@ -177,7 +177,8 @@ update_status ModuleInput::PreUpdate()
 
 			droppedFile_dir = sdlEvent.drop.file;
 			App->renderer2->SetModel(droppedFile_dir);
-			SDL_free(droppedFile_dir);
+			App->editor->consoleLogs.emplace_back(("File Dropped:" + std::string(droppedFile_dir)).c_str());
+			//SDL_free(droppedFile_dir);
 
 			break;
 		}
