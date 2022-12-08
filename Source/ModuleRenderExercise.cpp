@@ -42,7 +42,6 @@ update_status ModuleRenderExercise::PreUpdate()
 {
     return UPDATE_CONTINUE;
 }
-
 update_status ModuleRenderExercise::Update()
 {
    

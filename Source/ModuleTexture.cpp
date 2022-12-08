@@ -17,7 +17,7 @@
 #include "stb_image.h"
 using namespace std;
 
-const std::string ModuleTexture:: texFolderPath = "assets/";
+const std::string ModuleTexture:: texFolderPath = "assets/Textures/";
 
 ModuleTexture::ModuleTexture()
 {
@@ -29,7 +29,7 @@ ModuleTexture::~ModuleTexture()
 
 bool ModuleTexture::Start()
 {
-	//////std::string const& path = "assets/baboon.png";
+	////////std::string const& path = "assets/baboon.png";
 	std::string const& path = "assets/Textures/Baker_house.png";
 	HRESULT loadResult;
 	DirectX::TexMetadata info;
@@ -99,7 +99,6 @@ void ModuleTexture::LoadTex(std::string nameTexture, TexID& texData)
 {
 	// CODE INTENDED TO SEARCH FOR TEXTURE (COULDN'T MAKE IT WORK), COMMENTED IT SO DROP IN  MESH FUNCTIONALITY MAY WORK
 
-	//////std::string const& path = "assets/baboon.png";
 	/*std::string const& path = nameTexture;
 	HRESULT loadResult;
 	DirectX::TexMetadata info;

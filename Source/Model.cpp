@@ -75,18 +75,12 @@ void Model::LoadMaterials(const aiScene* scene)
 			{
 				texName.erase(0, lastSlashIdx + 1);
 			}
-			texName = "assets/" + texName;
+			texName = "assets/Textures" + texName;
 			TexID texData;
 			App->texture->LoadTex(texName.c_str(), texData);
 			materialID.push_back(texData);
 
-			//GLuint texture = App->texture->LoadTex(file.data, meshName);
-			//if (texture == -1) {
-			//	//texture failed to load, exit
-			//	return;
-			//}
-			//materialTextures.push_back(texture);
-			//App->editor->consoleLogs.emplace_back("Loaded texture");
+			
 			
 		}
 	}
